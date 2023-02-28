@@ -1,0 +1,12 @@
+<% for(const prop in messages){ %> <% if(messages[prop] &&
+messages[prop].length) {%>
+<div class="alert alert-<%=prop%> alert-dismissible fade show" role="alert">
+  <%= messages[prop] %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% break %> <% } %> <% } %>

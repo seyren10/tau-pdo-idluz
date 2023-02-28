@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg sticky-top bg-success" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand d-none d-md-inline" href="/"
+      ><img
+        src="/images/tau.png"
+        width="30"
+        height="30"
+        class="d-inline-block align-text-top"
+      />TARLAC AGRICULTURAL UNIVERSITY (PDO-IDLUZ)</a
+    >
+    <a class="navbar-brand d-inline d-md-none" href="/"
+      ><img
+        src="/images/tau.png"
+        width="30"
+        height="30"
+        class="d-inline-block align-text-top"
+      />TAU (PDO-IDLUZ)</a
+    >
+    <% if(currentUser) {%>
+    <div class="rounded-pill px-2 bg-primary ms-auto">
+      <a class="navbar-brand" href="/" style="font-size: 1.1em">
+        <i class="bi bi-person-circle"></i>&nbsp;<%= currentUser.nickName%></a
+      >
+      <% } %>
+    </div>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="bi bi-chevron-expand"></i>
+      <!-- <span class="navbar-toggler-icon"></span> -->
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/buildings">Buildings</a>
+        </li>
+        <% if(currentUser) {%>
+        <li class="nav-item">
+          <a class="nav-link" href="/buildings/new">Add Building</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/logout">Logout</a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
