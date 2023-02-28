@@ -7,7 +7,7 @@ const upload = require('../utils/multerLocal')
 
 router
   .route("/")
-  .get(buildingControllers.index)
+  .get(cathAsync(buildingControllers.index))
   .post(isLoggedIn,  upload.array('image',5),cathAsync(buildingControllers.create));
 
 router.get("/new", isLoggedIn, buildingControllers.new);

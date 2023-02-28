@@ -1,7 +1,8 @@
 const { Building } = require("../models/building");
 
-module.exports.index = (req, res) => {
-  res.send("You're on the buildings page");
+module.exports.index = async (req, res) => {
+  const buildings = await Building.find({})
+  res.render('buildings/', {buildings})
 };
 
 module.exports.create = async (req, res) => {
