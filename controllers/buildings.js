@@ -5,8 +5,14 @@ const ExpressError = require("../utils/ExpressError");
 
 //index
 module.exports.index = async (req, res) => {
-  const buildings = await Building.find({});
-  res.render("buildings", { buildings });
+  const { name: filteredName, typology: filteredTypology } = req.query;
+  const regex = new RegExp(filteredName, "i");
+  const regexTypology = new RegExp(filteredTypology, "i");
+  const buildings = await Building.find({
+    name: { $regex: regex },
+    typologies: { $in: regexTypology },
+  });
+  res.render("buildings", { buildings, filteredTypology, filteredName });
 };
 
 //add new building
@@ -16,7 +22,7 @@ module.exports.create = async (req, res) => {
   const paths = req.files.map(({ path }) => path);
   newBuilding.images = paths;
   newBuilding.typologies = req.body.typologies;
-  newBuilding.location = req.body.location
+  newBuilding.location = req.body.location;
   await newBuilding.save();
   req.flash("success", "Building successfully added.");
   res.redirect("/buildings/new");
@@ -49,7 +55,7 @@ module.exports.edit = async (req, res) => {
     new: true,
   });
   building.typologies = req.body.typologies;
-  building.location = req.body.location
+  building.location = req.body.location;
   const addedImages = req.files.map(({ path }) => path);
   building.images.push(...addedImages);
   await building.save();
@@ -65,15 +71,15 @@ module.exports.edit = async (req, res) => {
     }
   }
   await building.updateOne({ $pull: { images: { $in: imgsDelete } } });
-  req.flash('success',`${building.name} successfully updated.`);
+  req.flash("success", `${building.name} successfully updated.`);
   res.redirect(`/buildings/${id}`);
 };
 
 // delete building
 module.exports.delete = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params;
 
-  const {images} = await Building.findById(id)
+  const { images } = await Building.findById(id);
   if (images && images.length) {
     for (let img of images) {
       fs.unlink(path.join(__dirname, "../", img), (err) => {
@@ -84,9 +90,9 @@ module.exports.delete = async (req, res) => {
     }
   }
 
-  await Building.findByIdAndDelete(id)
-  req.flash('success', 'Building successfully deleted.')
-  res.redirect('/buildings')
+  await Building.findByIdAndDelete(id);
+  req.flash("success", "Building successfully deleted.");
+  res.redirect("/buildings");
 };
 
 //building add form
