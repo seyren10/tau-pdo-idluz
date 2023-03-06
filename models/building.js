@@ -1,18 +1,7 @@
 const mongoose = require("mongoose");
-const typologies = [
-  "institutional",
-  "security",
-  "residential",
-  "maintenance",
-  "workshop",
-  "assembly",
-  "commercial",
-  "agricultural",
-  "academic",
-  "research",
-  "agricultural research",
-  "sports",
-];
+const {typologies} = require('./categories/typologies');
+const {sensitivitySchema} = require('../models/sensitivity')
+
 
 const buildingSchema = new mongoose.Schema({
   classification: String,
@@ -30,7 +19,13 @@ const buildingSchema = new mongoose.Schema({
   capacity: Number,
   userCount: Number,
   assetValue: Number,
+  location: {
+    latitude: String,
+    longtitude: String
+  },
+  sensitivity: sensitivitySchema,
 });
+
 const Building = mongoose.model("Building", buildingSchema);
 module.exports = {
   Building,

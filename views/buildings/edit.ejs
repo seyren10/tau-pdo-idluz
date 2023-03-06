@@ -1,9 +1,13 @@
 <%- layout('layouts/boilerplate') %>
 <div class="row">
   <div class="col-md-6 offset-md-3 border rounded shadow p-3 bg-body-secondary">
-    <img src="/images/tau_banner.png" alt="" class="img-fluid">
-    <h4>Define new building</h4>
-    <form action="/buildings" method="POST" enctype="multipart/form-data">
+    <img src="/images/tau_banner.png" alt="" class="img-fluid" />
+    <h4>Edit building</h4>
+    <form
+      action="/buildings/<%= building._id %>/edit?_method=PUT"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="classification">Classification</label>
@@ -12,6 +16,7 @@
             class="form-control"
             id="classification"
             name="building[classification]"
+            value="<%= building.classification %>"
           />
         </div>
         <div class="col-md-6 mb-3">
@@ -21,6 +26,7 @@
             class="form-control"
             id="name"
             name="building[name]"
+            value="<%= building.name %>"
           />
         </div>
         <div class="col-12 mb-3">
@@ -31,7 +37,9 @@
             id="description"
             cols="30"
             rows="3"
-          ></textarea>
+          >
+<%= building.description %></textarea
+          >
         </div>
         <div class="col-12 mb-3">
           <label for="name">Image file(s) (maximum of 5 images)</label>
@@ -45,6 +53,18 @@
           />
         </div>
         <div class="col-12 mb-3">
+          <p class="fw-bold">Delete image(s)</p>
+          <div class="border border-1 border-danger p-3">
+            <% for(let img of building.images) {%>
+                <div class="w-25 position-relative d-inline-block">
+                    <img src="<%= img.slice(6) %>" alt="" class="img-fluid">
+                    <label for="<%= img %>"><h1 class="position-absolute p-0 m-0 top-0 start-0 opacity-0" style="font-size: 5rem;">ooo</h1></label>
+                    <input type="checkbox" id="<%= img %>" name="deletedImages[]" value="<%= img %>" class="form-check-input position-absolute top-0 start-0">
+                </div>  
+            <% } %>
+          </div>
+        </div>
+        <div class="col-12 mb-3">
           <div class="row">
             <div class="col">
               <label for="floorCount">Height (No. of Floors)</label>
@@ -53,6 +73,7 @@
                 class="form-control"
                 id="floorCount"
                 name="building[floorCount]"
+                value="<%= building.floorCount %>"
               />
             </div>
             <div class="col">
@@ -64,6 +85,7 @@
                 name="building[footprintArea]"
                 min="0.00"
                 step="0.01"
+                value="<%= building.footprintArea %>"
               />
             </div>
             <div class="col">
@@ -75,6 +97,7 @@
                 name="building[floorArea]"
                 min="0.00"
                 step="0.01"
+                value="<%= building.floorArea %>"
               />
             </div>
           </div>
@@ -87,7 +110,9 @@
             id="roomCount"
             cols="30"
             rows="3"
-          ></textarea>
+          >
+<%= building.roomCount %></textarea
+          >
         </div>
         <h5>Typology</h5>
         <div class="col-12 mb-3">
@@ -98,13 +123,9 @@
                 <label class="form-check-label" for="typology-<%= i %>"
                   ><%= t %></label
                 >
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="typology-<%= i %>"
-                  name="typologies[]"
-                  value="<%= t %>"
-                />
+                <input class="form-check-input" type="checkbox" id="typology-<%=
+                i %>" name="typologies[]" value="<%= t %>" <%=
+                building.typologies.includes(t) ? 'checked' : '' %> />
               </div>
             </div>
             <% })%>
@@ -119,6 +140,7 @@
                 class="form-control"
                 id="capacity"
                 name="building[capacity]"
+                value="<%= building.capacity %>"
               />
             </div>
             <div class="col">
@@ -128,6 +150,7 @@
                 class="form-control"
                 id="userCount"
                 name="building[userCount]"
+                value="<%= building.userCount %>"
               />
             </div>
             <div class="col">
@@ -139,10 +162,12 @@
                 name="building[assetValue]"
                 min="0.00"
                 step="0.01"
+                value="<%= building.assetValue %>"
               />
             </div>
           </div>
         </div>
+
         <h5>Location</h5>
         <div class="col-12 mb-3">
           <div class="row justify-content-center">
@@ -167,13 +192,11 @@
           </div>
         </div>
         <div class="col-md-6 ms-auto">
-           
-                <input
-                  type="submit"
-                  value="Add new building"
-                  class="form-control btn btn-success flex-fill"
-                />
-
+          <input
+            type="submit"
+            value="Update building"
+            class="form-control btn btn-success flex-fill"
+          />
         </div>
       </div>
     </form>

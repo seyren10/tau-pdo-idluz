@@ -1,0 +1,63 @@
+<%- layout('layouts/boilerplate') %>
+<div class="row">
+  <div class="col-md-6 offset-md-3 border rounded shadow p-3 bg-body-secondary">
+    <img src="/images/tau_banner.png" alt="" class="img-fluid" />
+    <h4>Add sensitivity data for <b><%= building.name %></b></h4>
+    <hr />
+    <h4 class="fw-light text-center">Building Materials</h4>
+
+    <form action="/buildings/<%= building._id %>/sensitivity" method="POST">
+      <div class="row align-items-end">
+        <div class="col-md-6 mb-3">
+        <label for="mainStructural">Main structural system (building type)</label>
+          <select class="form-select" id="mainStructural" name="sensitivity.material[mainStructural]">
+            <% materialCategories.mainStructuralCategories.forEach((c,i)=> { %>
+                <option value="<%= c %>" <%= (building.sensitivity && building.sensitivity.material.mainStructural === c) || i===0?"selected":"" %>> <%= c %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="exteriorWalls">Exterior walls coverage material</label>
+              <select class="form-select" id="exteriorWalls" name="sensitivity.material[exteriorWalls]">
+                <% materialCategories.exteriorWallsCategories.forEach((c,i)=> { %>
+                <option value="<%= c %>" <%= (building.sensitivity && building.sensitivity.material.exteriorWalls === c) || i===0?"selected":"" %>> <%= c %></option>
+                <% }) %>
+              </select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="roofFraming">Roof framing system</label>
+              <select class="form-select" id="roofFraming" name="sensitivity.material[roofFraming]">
+                <% materialCategories.roofFramingCategories.forEach((c,i)=> { %>
+                <option value="<%= c %>" <%=(building.sensitivity && building.sensitivity.material.roofFraming === c) || i===0?"selected":"" %>> <%= c %></option>
+                <% }) %>
+              </select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="roofCoverage">Roof coverage</label>
+              <select class="form-select" id="roofCoverage" name="sensitivity.material[roofCoverage]">
+                <% materialCategories.roofCoverageCategories.forEach((c,i)=> { %>
+                <option value="<%= c %>" <%=(building.sensitivity && building.sensitivity.material.roofCoverage === c) || i===0?"selected":"" %>> <%= c %></option>
+                <% }) %>
+              </select>
+        </div>
+        <hr>
+        <h4 class="fw-light text-center">Building Age and Maintenance</h4>
+        <div class="col-6 mb-3">
+            <label for="age">Building Age</label>
+            <input class="form-control" type="Number" name="sensitivity.maintenance[age]" id="age" value="<%= building.sensitivity ?  building.sensitivity.maintenance.age : ''%>"/>
+        </div>
+        <div class="col-6 mb-3">
+            <label for="retrofitYear">Number of years of since last Retrofit</label>
+            <input class="form-control" type="Number" name="sensitivity.maintenance[retrofitYear]" id="retrofitYear" value="<%= building.sensitivity ?  building.sensitivity.maintenance.retrofitYear : '' %>"/>
+        </div>
+        <div class="col-12 mb-3">
+            <label for="retrofitDescription">Description of retrofit</label>
+            <textarea class="form-control"  name="sensitivity.maintenance[retrofitDescription]" id="retrofitDescription"><%= building.sensitivity ?  building.sensitivity.maintenance.retrofitDescription : '' %></textarea>
+        </div>
+        <div class="col-md-6 ms-auto mb-3">
+            <input type="submit" value="Add Sensitivity Data" class="btn btn-success w-100">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

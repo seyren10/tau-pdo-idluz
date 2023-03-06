@@ -11,6 +11,7 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const flash = require("connect-flash");
 const ExpressError = require("./utils/ExpressError");
+const methodOverride = require('method-override')
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -19,6 +20,8 @@ app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.use(flash());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
+
 //SESSION
 const secret = process.env.SECRET || "samplename";
 const sessionConfig = {
@@ -54,6 +57,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 const {typologies} = require('./models/building')
+const materialCategories = require('./models/categories/materials')
 //LOCALS
 app.use((req, res, next) => {
   res.locals = {
@@ -64,6 +68,7 @@ app.use((req, res, next) => {
     },
     currentUser: req.user,
     typologies,
+    materialCategories,
   };
   next();
 });

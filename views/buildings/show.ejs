@@ -1,0 +1,219 @@
+<%- layout('layouts/boilerplate') %>
+<div class="row py-3">
+  <div class="col p-3 rounded shadow-lg">
+    <h5>Administrator Commands</h5>
+    <a href="/buildings/<%= building._id %>/edit" class="btn btn-success"
+      >Edit Details</a
+    >
+    <a
+      href="/buildings/<%= building._id %>/sensitivity/new"
+      class="btn btn-success"
+      >Add/Edit Sensitivity Data</a
+    >
+    <button
+      type="button"
+      class="btn btn-danger"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Delete building
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Warning!</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this building?
+            <b>(this action cannot be undone.)</b>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <form
+              action="/buildings/<%= building._id %>?_method=DELETE"
+              method="POST"
+              class="d-inline"
+            >
+              <input
+                type="submit"
+                value="Delete building"
+                class="btn btn-danger"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row row-cols-1 row-cols-md-2 g-3">
+  <div class="d-flex flex-column">
+    <div class="col">
+      <div id="buildingCarousel" class="carousel slide">
+        <div class="carousel-inner">
+          <% building.images.forEach((img,i)=> { %>
+          <div class="carousel-item <%= i === 0 ? 'active': '' %>">
+            <img src="<%= img.slice(6) %>" class="d-block w-100" alt="..." />
+          </div>
+          <% }) %>
+        </div>
+        <% if(!building.images.length) {%>
+        <div class="carousel-item active">
+          <img src="/images/tau.png" alt="" class="img-center" />
+        </div>
+        <% } %> <% if(building.images.length > 1) {%>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#buildingCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#buildingCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <% } %>
+      </div>
+    </div>
+    <div class="text-center">
+      <h3><%= building.name %></h3>
+      <p class="lead">
+        <%= building.description || 'No description specified...' %>
+      </p>
+    </div>
+  </div>
+
+  <div class="col shadow-lg rounded p-4">
+    <h3 class="fw-bold text-center">Building Details</h3>
+    <div class="row gy-2">
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Building Classification</p>
+        <h5><%= building.classification %></h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Building Height (No. of Floors)</p>
+        <h5><%= building.floorCount %></h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Building footprint area (sqm)</p>
+        <h5>
+          <%= building.footprintArea ?
+          building.footprintArea.toLocaleString('en-US'): '' %> m<sup>2</sup>
+        </h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Total floor area (sqm)</p>
+        <h5>
+          <%= building.floorArea ? building.floorArea.toLocaleString('en-US'):
+          '' %> m<sup>2</sup>
+        </h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Room count</p>
+        <h5><%= building.roomCount %></h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Building Typology</p>
+        <h5><%= building.typologies.reduce((a,c)=> a + ', '+ c) %></h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Capacity</p>
+        <h5><%= building.capacity%></h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Occupancy Capacity</p>
+        <h5><%= building.userCount%></h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Asset Value</p>
+        <h5>
+          <%= building.assetValue ? '₱' +
+          building.assetValue.toLocaleString('en-US') : ''%>
+        </h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Latitude</p>
+        <h5>
+          <%= building.location ? building.location.latitude : ''%>
+        </h5>
+      </div>
+      <div class="col-md-4 bg-body-secondary">
+        <p class="mb-0">Longtitude</p>
+        <h5>
+          <%= building.location ? building.location.longtitude : ''%>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <% if(building.sensitivity) {%>
+  <div class="col shadow-lg rounded p-4 mb-4">
+    <h3 class="fw-bold text-center">Sensitivity Data</h3>
+    <div class="row">
+      <div class="col-md-6 bg-body-secondary">
+        <h5 class="fw-bold text-center">Building Material</h5>
+        <div>
+          <p class="mb-0">Main structural system (building type)</p>
+          <h5><%= building.sensitivity.material.mainStructural %></h5>
+        </div>
+        <div>
+          <p class="mb-0">Exterior walls coverage material</p>
+          <h5><%= building.sensitivity.material.exteriorWalls %></h5>
+        </div>
+        <div>
+          <p class="mb-0">Roof framing system</p>
+          <h5><%= building.sensitivity.material.roofFraming %></h5>
+        </div>
+        <div>
+          <p class="mb-0">Roof coverage</p>
+          <h5><%= building.sensitivity.material.roofCoverage %></h5>
+        </div>
+      </div>
+      <div class="col-md-6 bg-dark-subtle">
+        <h5 class="fw-bold text-center">Building Age and Maintenance</h5>
+        <div>
+          <p class="mb-0">Building Age</p>
+          <h5><%= building.sensitivity.maintenance.age %></h5>
+        </div>
+        <div>
+          <p class="mb-0">Number of years of since last Retrofit</p>
+          <h5><%= building.sensitivity.maintenance.retrofitYear %></h5>
+        </div>
+        <div>
+          <p class="mb-0">Description of retrofit</p>
+          <h5><%= building.sensitivity.maintenance.retrofitDescription %></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% } %>
+</div>
