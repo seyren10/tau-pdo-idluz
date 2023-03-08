@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const {typologies} = require('./categories/typologies');
+const {classifications} = require('./categories/classifications')
 const {sensitivitySchema} = require('../models/sensitivity')
 
 
 const buildingSchema = new mongoose.Schema({
-  classification: String,
+  classification: {
+      type: String,
+      enum: classifications
+  },
+  
   name: String,
   description: String,
   images: [String],
@@ -21,7 +26,8 @@ const buildingSchema = new mongoose.Schema({
   assetValue: Number,
   location: {
     latitude: String,
-    longtitude: String
+    longtitude: String,
+    mapLabel: String
   },
   sensitivity: sensitivitySchema,
 });

@@ -1,0 +1,23 @@
+.circle-marker {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid white;
+  color: white;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.circle-marker.a {
+  background-color: red;
+}
+
+.circle-marker.b {
+  background-color: #f8820b;
+}
+
+.circle-marker.c {
+  background-color: #1111DD;
+}

@@ -1,18 +1,21 @@
 <%- layout('layouts/boilerplate') %>
 <div class="row">
   <div class="col-md-6 offset-md-3 border rounded shadow p-3 bg-body-secondary">
-    <img src="/images/tau_banner.png" alt="" class="img-fluid">
+    <img src="/images/tau_banner.png" alt="" class="img-fluid" />
     <h4>Define new building</h4>
     <form action="/buildings" method="POST" enctype="multipart/form-data">
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="classification">Classification</label>
-          <input
-            type="text"
-            class="form-control"
-            id="classification"
+          <select
             name="building[classification]"
-          />
+            id="classification"
+            class="form-select"
+          >
+            <% classifications.forEach((c,i)=>{ %>
+              <option value="<%= c %>" <%= i === 0 && 'selected' %>><%= c %></option>
+            <% }) %>
+            </select>
         </div>
         <div class="col-md-6 mb-3">
           <label for="name">Name</label>
@@ -167,13 +170,11 @@
           </div>
         </div>
         <div class="col-md-6 ms-auto">
-           
-                <input
-                  type="submit"
-                  value="Add new building"
-                  class="form-control btn btn-success flex-fill"
-                />
-
+          <input
+            type="submit"
+            value="Add new building"
+            class="form-control btn btn-success flex-fill"
+          />
         </div>
       </div>
     </form>

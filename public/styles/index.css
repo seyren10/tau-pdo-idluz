@@ -41,6 +41,11 @@ h5,
   column-gap: .1em;
 }
 
+#map {
+  height: 80vh;
+  background: grey;
+}
+
 @media screen and (width < 768px) {
   .fit {
     max-height: 300px;
