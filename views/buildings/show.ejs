@@ -1,5 +1,6 @@
 <%- layout('layouts/boilerplate') %>
 <div class="row py-3">
+  <% if(currentUser) { %>
   <div class="col p-3 rounded shadow-lg">
     <h5>Administrator Commands</h5>
     <a href="/buildings/<%= building._id %>/edit" class="btn btn-success"
@@ -66,6 +67,7 @@
       </div>
     </div>
   </div>
+  <% } %>
 </div>
 <div class="row row-cols-1 row-cols-md-2 g-3">
   <div class="d-flex flex-column">
@@ -143,7 +145,7 @@
       </div>
       <div class="col-md-4 bg-body-secondary">
         <p class="mb-0">Building Typology</p>
-        <h5><%= building.typologies.reduce((a,c)=> a + ', '+ c) %></h5>
+        <h5><%= building.typologies.join('/') %></h5>
       </div>
       <div class="col-md-4 bg-body-secondary">
         <p class="mb-0">Capacity</p>
@@ -162,15 +164,11 @@
       </div>
       <div class="col-md-4 bg-body-secondary">
         <p class="mb-0">Latitude</p>
-        <h5>
-          <%= building.location ? building.location.latitude : ''%>
-        </h5>
+        <h5><%= building.location ? building.location.latitude : ''%></h5>
       </div>
       <div class="col-md-4 bg-body-secondary">
         <p class="mb-0">Longtitude</p>
-        <h5>
-          <%= building.location ? building.location.longtitude : ''%>
-        </h5>
+        <h5><%= building.location ? building.location.longtitude : ''%></h5>
       </div>
     </div>
   </div>

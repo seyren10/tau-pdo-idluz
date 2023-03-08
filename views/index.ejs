@@ -1,2 +1,29 @@
 <%- layout('layouts/boilerplate') %>
-<h1>Welcome to PDO-IDLUZ</h1>
+<link rel="stylesheet" href="/styles/marker-styles.css">
+
+<div class="d-flex align-items-center gap-3">
+  <div>
+    <img src="/images/tau.png" alt="" class="img-fluid" width="80px"/>
+  </div>
+  <div>
+    <h5 class="mb-0">Tarlac Agricultural University</h5>
+    <p class="fw-light fs-5 py-0 my-0">CAMPUS MASTER DEVELOPMENT PLAN</p>
+  </div>
+ 
+</div>
+<div id="map" class="card shadow-lg"></div>
+<script>
+  const buildings = <%- JSON.stringify(buildings)%>
+</script>
+
+<script src="/scripts/data/LayoutA.js"></script>
+<script src="/scripts/data/LayoutB.js"></script>
+<script src="/scripts/data/LayoutC.js"></script>
+<script src="/scripts/data/LayoutD.js"></script>
+<script src="/scripts/data/LayoutE.js"></script>
+<script src="/scripts/data/LayoutF.js"></script>
+<script src="/scripts/data/LayoutG.js"></script>
+<script src="/scripts/data/LayoutH.js"></script>
+<script src="/scripts/data/TAU_Layout.js"></script>
+
+<script src="/scripts/myLeaflet.js"></script>

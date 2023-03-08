@@ -11,13 +11,15 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="classification">Classification</label>
-          <input
-            type="text"
-            class="form-control"
-            id="classification"
+          <select
+            class="form-select"
             name="building[classification]"
-            value="<%= building.classification %>"
-          />
+            id="classification"
+          >
+            <% classifications.forEach((c,i)=> { %> 
+              <option value="<%= c %>" <%= c === building.classification && 'selected' %>><%= c %></option>
+            <% }) %>
+          </select>
         </div>
         <div class="col-md-6 mb-3">
           <label for="name">Name</label>
@@ -56,11 +58,24 @@
           <p class="fw-bold">Delete image(s)</p>
           <div class="border border-1 border-danger p-3">
             <% for(let img of building.images) {%>
-                <div class="w-25 position-relative d-inline-block">
-                    <img src="<%= img.slice(6) %>" alt="" class="img-fluid">
-                    <label for="<%= img %>"><h1 class="position-absolute p-0 m-0 top-0 start-0 opacity-0" style="font-size: 5rem;">ooo</h1></label>
-                    <input type="checkbox" id="<%= img %>" name="deletedImages[]" value="<%= img %>" class="form-check-input position-absolute top-0 start-0">
-                </div>  
+            <div class="w-25 position-relative d-inline-block">
+              <img src="<%= img.slice(6) %>" alt="" class="img-fluid" />
+              <label for="<%= img %>"
+                ><h1
+                  class="position-absolute p-0 m-0 top-0 start-0 opacity-0"
+                  style="font-size: 5rem"
+                >
+                  ooo
+                </h1></label
+              >
+              <input
+                type="checkbox"
+                id="<%= img %>"
+                name="deletedImages[]"
+                value="<%= img %>"
+                class="form-check-input position-absolute top-0 start-0"
+              />
+            </div>
             <% } %>
           </div>
         </div>
@@ -178,7 +193,6 @@
                 class="form-control"
                 id="latitude"
                 name="location[latitude]"
-                value="<%= building.location.latitude %>"
               />
             </div>
             <div class="col-6">
@@ -188,7 +202,6 @@
                 class="form-control"
                 id="longtitude"
                 name="location[longtitude]"
-                value="<%= building.location.longtitude %>"
               />
             </div>
           </div>

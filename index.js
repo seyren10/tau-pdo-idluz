@@ -11,7 +11,7 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const flash = require("connect-flash");
 const ExpressError = require("./utils/ExpressError");
-const methodOverride = require('method-override')
+const methodOverride = require("method-override");
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -20,7 +20,7 @@ app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.use(flash());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'))
+app.use(methodOverride("_method"));
 
 //SESSION
 const secret = process.env.SECRET || "samplename";
@@ -55,9 +55,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-const {typologies} = require('./models/building')
-const materialCategories = require('./models/categories/materials')
+const { typologies } = require("./models/building");
+const materialCategories = require("./models/categories/materials");
+const { classifications } = require("./models/categories/classifications");
 //LOCALS
 app.use((req, res, next) => {
   res.locals = {
@@ -69,6 +69,7 @@ app.use((req, res, next) => {
     currentUser: req.user,
     typologies,
     materialCategories,
+    classifications,
   };
   next();
 });
@@ -80,12 +81,11 @@ const buildingRoutes = require("./routes/buildings");
 app.use("/admin", userRoutes);
 app.use("/buildings", buildingRoutes);
 
-// const register = require("./reguser");
-// app.use(register);
-
 //HOME
-app.get("/", (req, res) => {
-  res.render("");
+const { Building } = require("./models/building");
+app.get("/", async (req, res) => {
+  const buildings = await Building.find({});
+  res.render("", { buildings });
 });
 
 //all req error handler
