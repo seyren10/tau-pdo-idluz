@@ -1,4 +1,4 @@
-var map = L.map("map").setView([15.638161, 120.418707], 14);
+var map = L.map("map").setView([15.638161, 120.418707], 16);
 
 var osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
@@ -28,6 +28,7 @@ const maplayout = L.geoJSON(TAU_Layout, {
 });
 maplayout.addTo(map);
 
+const cluster = L.markerClusterGroup();
 
 // #region 'Marker class A'
 // Markers per classifications
@@ -44,7 +45,6 @@ for (let building of classA) {
       title: building.name,
     }
   );
-
   marker.on("click", (e) => {
     // const {lat,lng} = e.latlng
     L.popup()
@@ -76,32 +76,9 @@ for (let building of classA) {
     html: `<div class='circle-marker a'><span>${building.location.mapLabel}</span></div>`,
   });
   marker.setIcon(markerIcon);
-
-  // const popup = marker
-  //   .bindPopup(
-  //     `<div style='width: 200px; height: auto;'>
-  //       <img src='${
-  //         building.images.length > 0
-  //           ? building.images[0].slice(6)
-  //           : "/images/tau.png"
-  //       }' class='img-fluid'/>
-  //     </div>
-  //     <a href='/buildings/${building._id}'>${building.name}</a>
-  //     <p class='text-muted mt-0'>${building.typologies.reduce(
-  //       (a, c) => `${a}/${c}`
-  //     )}</p>
-  //     <hr />
-  //     <p>Location: ${building.location.latitude}, ${
-  //       building.location.longtitude
-  //     }</p>
-  //     `
-  //   )
-  //   .openPopup();
-
-  buildingMarkersA.push(marker);
+  // buildingMarkersA.push(marker);
+  cluster.addLayer(marker);
 }
-
-
 const layout_a = L.geoJSON(Layout_A, {
   style: {
     fillColor: "red",
@@ -158,7 +135,9 @@ for (let building of classB) {
   });
   marker.setIcon(markerIcon);
 
-  buildingMarkersB.push(marker);
+  // buildingMarkersB.push(marker);
+
+  cluster.addLayer(marker);
 }
 
 const layout_b = L.geoJSON(Layout_B, {
@@ -174,7 +153,7 @@ markerLayoutB.addTo(map);
 
 //#region 'Building Marker C'
 
-const classC= buildings.filter(
+const classC = buildings.filter(
   (b) => b.classification === "Academic Buildings"
 );
 const buildingMarkersC = [];
@@ -218,7 +197,9 @@ for (let building of classC) {
   });
   marker.setIcon(markerIcon);
 
-  buildingMarkersC.push(marker);
+  // buildingMarkersC.push(marker);
+
+  cluster.addLayer(marker);
 }
 
 const layout_c = L.geoJSON(Layout_C, {
@@ -232,6 +213,55 @@ const markerLayoutC = L.layerGroup([layout_c, ...buildingMarkersC]);
 markerLayoutC.addTo(map);
 //#endregion
 
+//#region 'Building Marker D'
+const classD = buildings.filter(
+  (b) => b.classification === "Research, Extension, and Training"
+);
+const buildingMarkersD = [];
+for (let building of classD) {
+  const marker = L.marker(
+    [building.location.latitude, building.location.longtitude],
+    {
+      title: building.name,
+    }
+  );
+
+  marker.on("click", (e) => {
+    // const {lat,lng} = e.latlng
+    L.popup()
+      .setLatLng(e.latlng)
+      .setContent(
+        `<div style='width: 200px; height: auto;'>
+    <img src='${
+      building.images.length > 0
+        ? building.images[0].slice(6)
+        : "/images/tau.png"
+    }' class='img-fluid'/>
+  </div>
+  <a href='/buildings/${building._id}'>${building.name}</a>
+  <p class='text-muted mt-0'>${building.typologies.reduce(
+    (a, c) => `${a}/${c}`
+  )}</p>
+  <hr />
+  <p>Location: ${building.location.latitude}, ${
+          building.location.longtitude
+        }</p>
+  `
+      )
+      .openOn(map);
+    map.panTo(e.latlng);
+  });
+
+  const markerIcon = L.divIcon({
+    className: "",
+    html: `<div class='circle-marker d'><span>${building.location.mapLabel}</span></div>`,
+  });
+  marker.setIcon(markerIcon);
+
+  // buildingMarkersD.push(marker);
+
+  cluster.addLayer(marker);
+}
 const layout_d = L.geoJSON(Layout_D, {
   style: {
     fillColor: "#E0E038",
@@ -239,7 +269,61 @@ const layout_d = L.geoJSON(Layout_D, {
     color: "black",
   },
 });
-layout_d.addTo(map);
+
+const markerLayoutD = L.layerGroup([layout_d, ...buildingMarkersD]);
+markerLayoutD.addTo(map);
+
+//#endregion
+
+//#region 'Building Marker E'
+const classE = buildings.filter(
+  (b) => b.classification === "Housing Facilities"
+);
+const buildingMarkersE = [];
+for (let building of classE) {
+  const marker = L.marker(
+    [building.location.latitude, building.location.longtitude],
+    {
+      title: building.name,
+    }
+  );
+
+  marker.on("click", (e) => {
+    // const {lat,lng} = e.latlng
+    L.popup()
+      .setLatLng(e.latlng)
+      .setContent(
+        `<div style='width: 200px; height: auto;'>
+    <img src='${
+      building.images.length > 0
+        ? building.images[0].slice(6)
+        : "/images/tau.png"
+    }' class='img-fluid'/>
+  </div>
+  <a href='/buildings/${building._id}'>${building.name}</a>
+  <p class='text-muted mt-0'>${building.typologies.reduce(
+    (a, c) => `${a}/${c}`
+  )}</p>
+  <hr />
+  <p>Location: ${building.location.latitude}, ${
+          building.location.longtitude
+        }</p>
+  `
+      )
+      .openOn(map);
+    map.panTo(e.latlng);
+  });
+
+  const markerIcon = L.divIcon({
+    className: "",
+    html: `<div class='circle-marker e'><span>${building.location.mapLabel}</span></div>`,
+  });
+  marker.setIcon(markerIcon);
+
+  // buildingMarkersE.push(marker);
+
+  cluster.addLayer(marker);
+}
 
 const layout_e = L.geoJSON(Layout_E, {
   style: {
@@ -248,8 +332,58 @@ const layout_e = L.geoJSON(Layout_E, {
     color: "black",
   },
 });
-layout_e.addTo(map);
+const markerLayoutE = L.layerGroup([layout_e, ...buildingMarkersE]);
+markerLayoutE.addTo(map);
+//#endregion
 
+//#region 'Building Marker F'
+const classF = buildings.filter(
+  (b) => b.classification === "Sports and Recreational Facilities"
+);
+const buildingMarkersF = [];
+for (let building of classF) {
+  const marker = L.marker(
+    [building.location.latitude, building.location.longtitude],
+    {
+      title: building.name,
+    }
+  );
+
+  marker.on("click", (e) => {
+    // const {lat,lng} = e.latlng
+    L.popup()
+      .setLatLng(e.latlng)
+      .setContent(
+        `<div style='width: 200px; height: auto;'>
+    <img src='${
+      building.images.length > 0
+        ? building.images[0].slice(6)
+        : "/images/tau.png"
+    }' class='img-fluid'/>
+  </div>
+  <a href='/buildings/${building._id}'>${building.name}</a>
+  <p class='text-muted mt-0'>${building.typologies.reduce(
+    (a, c) => `${a}/${c}`
+  )}</p>
+  <hr />
+  <p>Location: ${building.location.latitude}, ${
+          building.location.longtitude
+        }</p>
+  `
+      )
+      .openOn(map);
+    map.panTo(e.latlng);
+  });
+
+  const markerIcon = L.divIcon({
+    className: "",
+    html: `<div class='circle-marker f'><span>${building.location.mapLabel}</span></div>`,
+  });
+  marker.setIcon(markerIcon);
+
+  // buildingMarkersF.push(marker);
+  cluster.addLayer(marker);
+}
 const layout_f = L.geoJSON(Layout_F, {
   style: {
     fillColor: "#1EEFEF",
@@ -257,8 +391,58 @@ const layout_f = L.geoJSON(Layout_F, {
     color: "black",
   },
 });
-layout_f.addTo(map);
+const markerLayoutF = L.layerGroup([layout_f, ...buildingMarkersF]);
+markerLayoutF.addTo(map);
 
+//#endregion
+
+//#region 'Building Marker G'
+const classG = buildings.filter((b) => b.classification === "Utilities");
+const buildingMarkersG = [];
+for (let building of classG) {
+  const marker = L.marker(
+    [building.location.latitude, building.location.longtitude],
+    {
+      title: building.name,
+    }
+  );
+
+  marker.on("click", (e) => {
+    // const {lat,lng} = e.latlng
+    L.popup()
+      .setLatLng(e.latlng)
+      .setContent(
+        `<div style='width: 200px; height: auto;'>
+    <img src='${
+      building.images.length > 0
+        ? building.images[0].slice(6)
+        : "/images/tau.png"
+    }' class='img-fluid'/>
+  </div>
+  <a href='/buildings/${building._id}'>${building.name}</a>
+  <p class='text-muted mt-0'>${building.typologies.reduce(
+    (a, c) => `${a}/${c}`
+  )}</p>
+  <hr />
+  <p>Location: ${building.location.latitude}, ${
+          building.location.longtitude
+        }</p>
+  `
+      )
+      .openOn(map);
+    map.panTo(e.latlng);
+  });
+
+  const markerIcon = L.divIcon({
+    className: "",
+    html: `<div class='circle-marker g'><span>${building.location.mapLabel}</span></div>`,
+  });
+  marker.setIcon(markerIcon);
+
+  // buildingMarkersG.push(marker);
+
+  cluster.addLayer(marker);
+}
 const layout_g = L.geoJSON(Layout_G, {
   style: {
     fillColor: "#D20D0D",
@@ -266,8 +450,57 @@ const layout_g = L.geoJSON(Layout_G, {
     color: "black",
   },
 });
-layout_g.addTo(map);
+const markerLayoutG = L.layerGroup([layout_g, ...buildingMarkersG]);
+markerLayoutG.addTo(map);
+//#endregion
 
+//#region 'Building Marker H'
+const classH = buildings.filter((b) => b.classification === "Other Structures");
+const buildingMarkersH = [];
+for (let building of classH) {
+  const marker = L.marker(
+    [building.location.latitude, building.location.longtitude],
+    {
+      title: building.name,
+    }
+  );
+
+  marker.on("click", (e) => {
+    // const {lat,lng} = e.latlng
+    L.popup()
+      .setLatLng(e.latlng)
+      .setContent(
+        `<div style='width: 200px; height: auto;'>
+    <img src='${
+      building.images.length > 0
+        ? building.images[0].slice(6)
+        : "/images/tau.png"
+    }' class='img-fluid'/>
+  </div>
+  <a href='/buildings/${building._id}'>${building.name}</a>
+  <p class='text-muted mt-0'>${building.typologies.reduce(
+    (a, c) => `${a}/${c}`
+  )}</p>
+  <hr />
+  <p>Location: ${building.location.latitude}, ${
+          building.location.longtitude
+        }</p>
+  `
+      )
+      .openOn(map);
+    map.panTo(e.latlng);
+  });
+
+  const markerIcon = L.divIcon({
+    className: "",
+    html: `<div class='circle-marker h'><span>${building.location.mapLabel}</span></div>`,
+  });
+  marker.setIcon(markerIcon);
+
+  // buildingMarkersH.push(marker);
+
+  cluster.addLayer(marker);
+}
 const layout_h = L.geoJSON(Layout_H, {
   style: {
     fillColor: "#16E816",
@@ -275,8 +508,11 @@ const layout_h = L.geoJSON(Layout_H, {
     color: "black",
   },
 });
-layout_h.addTo(map);
+const markerLayoutH = L.layerGroup([layout_h, ...buildingMarkersH]);
+markerLayoutH.addTo(map);
+//#endregion
 
+cluster.addTo(map);
 // Layer Controllers
 const baseMaps = {
   "Google Satellite": googleSat,
@@ -286,12 +522,12 @@ const baseMaps = {
 const overlayMaps = {
   "Administrative and Support Services": markerLayoutA,
   "Auxiliary Buildings and Production Facilities": markerLayoutB,
-  "Academic Buildings": layout_c,
-  "Research, Extension, and Training": layout_d,
-  "Housing Facilities": layout_e,
-  "Sports and Recreational Facilities": layout_f,
-  Utilities: layout_g,
-  "Other Structures": layout_h,
+  "Academic Buildings": markerLayoutC,
+  "Research, Extension, and Training": markerLayoutD,
+  "Housing Facilities": markerLayoutE,
+  "Sports and Recreational Facilities": markerLayoutF,
+  Utilities: markerLayoutG,
+  "Other Structures": markerLayoutH,
 };
 
 const layerControl = L.control

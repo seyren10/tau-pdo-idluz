@@ -6,14 +6,17 @@ const ExpressError = require("../utils/ExpressError");
 
 //index
 module.exports.index = async (req, res) => {
-  const { name: filteredName, typology: filteredTypology } = req.query;
+  const { name: filteredName, typology: filteredTypology, classification: filteredClassification } = req.query;
   const regex = new RegExp(filteredName, "i");
   const regexTypology = new RegExp(filteredTypology, "i");
+  const regexClassification = new RegExp(filteredClassification, "i");
+
   const buildings = await Building.find({
     name: { $regex: regex },
     typologies: { $in: regexTypology },
+    classification: regexClassification
   });
-  res.render("buildings", { buildings, filteredTypology, filteredName });
+  res.render("buildings", { buildings, filteredTypology, filteredName, filteredClassification });
 };
 
 //get the last record and increase the index to 1
@@ -31,7 +34,6 @@ const setMapLabel = async (id, building) => {
   const lastDoc = await Building.findOne({
     classification: targetClassification,
   }).sort({ _id: -1 });
-  console.log(`Last Doc: ${lastDoc.name}`);
 
   if (!lastDoc) {
     return getMapLabel(building.building.classification) + 1;

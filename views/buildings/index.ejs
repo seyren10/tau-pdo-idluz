@@ -1,16 +1,25 @@
 <%- layout('layouts/boilerplate') %>
-
-
-<div class="row mb-3">
-  <div class="col-md-3 mt-3" >
-      <form action="/buildings" method="GET">
-        <div class="input-group mb-3">
-          <span class="input-group-text"> <i class="bi bi-search"></i></span>
-          <input type="text" class="form-control" placeholder="Search by building name" name="name" value="<%= filteredName %>"/>
-          </button>
+<div class="row mt-0 pt-0 d-none d-md-flex">
+  <div class="col mt-0 pt-0">
+      <form action="/buildings" method="GET" class="row row-cols-lg-auto align-items-end pos-fixed-md bg-white">
+        <div class="col-12">
+          <label for="name" class="d-none d-md-block">Search by building name</label>
+          <div class="input-group">
+            <span class="input-group-text"> <i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" name="name" value="<%= filteredName %>"/>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="typology">filter by building typology</label>
+        <div class="col-12">
+          <label for="classification" class="d-none d-md-block">filter by building classification</label>
+          <select name="classification" id="classification" class="form-select">
+            <option value="" <%= !filteredClassification ? 'selected' : '' %>>All</option>
+            <% classifications.forEach((c,i)=>{ %>
+               <option value="<%= c %>" <%= filteredClassification === c ? 'selected' : '' %>><%= c %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-12 mb-3 mb-md-0">
+          <label for="typology" class="d-none d-md-block">filter by building typology</label>
           <select name="typology" id="typology" class="form-select">
             <option value="" <%= !filteredTypology ? 'selected' : '' %>>All</option>
             <% typologies.forEach((t,i)=>{ %>
@@ -20,10 +29,56 @@
         </div>
         <input type="submit" value="Search" class="btn btn-success">
       </form>
+  </div>
+</div>
+<div class="row d-flex d-md-none">
+  <div class="col pos-fixed-sm">
+    <a class="btn btn-success" data-bs-toggle="offcanvas" href="#filterCanvas">
+      <i class="bi bi-funnel"></i>
+      Filter 
+    </a>
+  </div>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="filterCanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        <form action="/buildings" method="GET" class="row">
+          <div class="col-12">
+            <label for="name">Search by building name</label>
+            <div class="input-group">
+              <span class="input-group-text"> <i class="bi bi-search"></i></span>
+              <input type="text" class="form-control" name="name" value="<%= filteredName %>"/>
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="classification">filter by building classification</label>
+            <select name="classification" id="classification" class="form-select">
+              <option value="" <%= !filteredClassification ? 'selected' : '' %>>All</option>
+              <% classifications.forEach((c,i)=>{ %>
+                 <option value="<%= c %>" <%= filteredClassification === c ? 'selected' : '' %>><%= c %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="col-12 mb-3 mb-md-0">
+            <label for="typology">filter by building typology</label>
+            <select name="typology" id="typology" class="form-select">
+              <option value="" <%= !filteredTypology ? 'selected' : '' %>>All</option>
+              <% typologies.forEach((t,i)=>{ %>
+                 <option value="<%= t %>" <%= filteredTypology === t ? 'selected' : '' %>><%= t %></option>
+              <% }) %>
+            </select>
+          </div>
+          <input type="submit" value="Search" class="btn btn-success">
+        </form>
+      </div>
     </div>
   </div>
 </div>
-<div class="row g-4">
+<div class="row g-4 mt-0 mt-md-5">
   <% if(buildings.length === 0) { %>
     <div class="d-flex justify-content-center">
       <div class="bg-secondary p-3 rounded text-white text-center">

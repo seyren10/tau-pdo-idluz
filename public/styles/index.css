@@ -46,8 +46,32 @@ h5,
   background: grey;
 }
 
+.pos-fixed-md {
+  position: static;
+  width: 100%;
+  z-index: 1;
+  margin-top: -4px;
+  padding-bottom: 1em;
+}
+.pos-fixed-sm {
+  position: static;
+  width: 100%;
+  z-index: 1;
+  margin-top: 4px;
+  padding-bottom: 1em;
+}
+
 @media screen and (width < 768px) {
   .fit {
     max-height: 300px;
+  }
+  .pos-fixed-sm {
+    position: fixed;
+  }
+}
+
+@media screen and (width >= 768px){
+  .pos-fixed-md {
+    position: fixed;
   }
 }

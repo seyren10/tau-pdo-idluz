@@ -2,11 +2,11 @@
   display: inline-block;
   border-radius: 50%;
   border: 2px solid white;
-  color: white;
+  color: whitesmoke;
   text-align: center;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: bold;
-  padding: 3px;
+  padding: 2px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -20,4 +20,21 @@
 
 .circle-marker.c {
   background-color: #1111DD;
+}
+.circle-marker.d {
+  background-color: #E0E038;
+}
+.circle-marker.e {
+  background-color: #D71275;
+}
+
+.circle-marker.f {
+  background-color: #1EEFEF;
+}
+
+.circle-marker.g {
+  background-color: #D20D0D;
+}
+.circle-marker.h {
+  background-color: #16E816;
 }
