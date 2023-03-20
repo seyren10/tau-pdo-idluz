@@ -4,6 +4,7 @@ var osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   minZoom: 16,
+  maxZoom: 20,
 });
 // osm.addTo(map);
 // console.log(buildings);
@@ -14,6 +15,7 @@ var googleSat = L.tileLayer(
   {
     subdomains: ["mt0", "mt1", "mt2", "mt3"],
     minZoom: 16,
+    maxZoom: 20,
   }
 );
 googleSat.addTo(map);
@@ -21,18 +23,86 @@ googleSat.addTo(map);
 //GeoJson
 const maplayout = L.geoJSON(TAU_Layout, {
   style: {
-    fillColor: "#39DB2D",
-    fillOpacity: 0.3,
+    weight: 3,
+    fillColor: "#394B2D",
+    fillOpacity: 0.5,
     color: "#0B3A07",
   },
 });
 maplayout.addTo(map);
 
-const cluster = L.markerClusterGroup();
+
+map.on('zoom',()=>{
+  const currentZoom = map.getZoom();
+  console.log(currentZoom)
+
+  if(currentZoom >=17){
+    clusterA.options.iconCreateFunction = function (cluster){
+      return L.divIcon({
+        className: '',
+        html: `<div class='marker-cluster a reduce'><span>${clusterLabelA}</span></div>`,
+      })
+    }
+    clusterB.options.iconCreateFunction = function (cluster){
+      return L.divIcon({
+        className: '',
+        html: `<div class='marker-cluster b reduce'><span>${clusterLabelB}</span></div>`,
+      })
+    }
+    clusterC.options.iconCreateFunction = function (cluster){
+      return L.divIcon({
+        className: '',
+        html: `<div class='marker-cluster c reduce'><span>${clusterLabelC}</span></div>`,
+      })
+    }
+    clusterD.options.iconCreateFunction = function (cluster){
+      return L.divIcon({
+        className: '',
+        html: `<div class='marker-cluster d reduce'><span>${clusterLabelD}</span></div>`,
+      })
+    }
+    clusterE.options.iconCreateFunction = function (cluster){
+      return L.divIcon({
+        className: '',
+        html: `<div class='marker-cluster e reduce'><span>${clusterLabelE}</span></div>`,
+      })
+    }
+    clusterF.options.iconCreateFunction = function (cluster){
+      return L.divIcon({
+        className: '',
+        html: `<div class='marker-cluster f reduce'><span>${clusterLabelF}</span></div>`,
+      })
+    }
+    clusterG.options.iconCreateFunction = function (cluster){
+      return L.divIcon({
+        className: '',
+        html: `<div class='marker-cluster g reduce'><span>${clusterLabelG}</span></div>`,
+      })
+    }
+    clusterH.options.iconCreateFunction = function (cluster){
+      return L.divIcon({
+        className: '',
+        html: `<div class='marker-cluster h reduce'><span>${clusterLabelH}</span></div>`,
+      })
+    }
+  }
+})
 
 // #region 'Marker class A'
 // Markers per classifications
+let clusterLabelA = "";
 const buildingMarkersA = [];
+const clusterA = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    console.dir(cluster)
+    return L.divIcon({
+      className: "",
+      html: `<div class='marker-cluster a'><span>${clusterLabelA}</span></div>`,
+    });
+  },
+  disableClusteringAtZoom: 18,
+});
+
 
 //buildings per class
 const classA = buildings.filter(
@@ -62,7 +132,8 @@ for (let building of classA) {
     (a, c) => `${a}/${c}`
   )}</p>
   <hr />
-  <p>Location: ${building.location.latitude}, ${
+  <p class='text-success mb-0'>${building.classification}</p>
+  <p class='mt-0'>Location: ${building.location.latitude}, ${
           building.location.longtitude
         }</p>
   `
@@ -75,26 +146,36 @@ for (let building of classA) {
     className: "",
     html: `<div class='circle-marker a'><span>${building.location.mapLabel}</span></div>`,
   });
+  clusterLabelA = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
-  // buildingMarkersA.push(marker);
-  cluster.addLayer(marker);
+  clusterA.addLayer(marker);
 }
 const layout_a = L.geoJSON(Layout_A, {
   style: {
+    weight: .5,
     fillColor: "red",
-    fillOpacity: 0.6,
+    fillOpacity: 0.5,
     color: "black",
   },
 });
-const markerLayoutA = L.layerGroup([layout_a, ...buildingMarkersA]);
+const markerLayoutA = L.layerGroup([layout_a, clusterA]);
 markerLayoutA.addTo(map);
 //#endregion
 
 //#region 'Building marker B'
+let clusterLabelB;
 const classB = buildings.filter(
   (b) => b.classification === "Auxiliary Buildings and Production Facilities"
 );
-const buildingMarkersB = [];
+const clusterB = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    return L.divIcon({
+      className: "",
+      html: `<div class='marker-cluster b'><span>${clusterLabelB}</span></div>`,
+    });
+  },
+  disableClusteringAtZoom: 18,
+});
 for (let building of classB) {
   const marker = L.marker(
     [building.location.latitude, building.location.longtitude],
@@ -120,7 +201,8 @@ for (let building of classB) {
     (a, c) => `${a}/${c}`
   )}</p>
   <hr />
-  <p>Location: ${building.location.latitude}, ${
+  <p class='text-success mb-0'>${building.classification}</p>
+  <p class='mt-0'>Location: ${building.location.latitude}, ${
           building.location.longtitude
         }</p>
   `
@@ -133,30 +215,38 @@ for (let building of classB) {
     className: "",
     html: `<div class='circle-marker b'><span>${building.location.mapLabel}</span></div>`,
   });
+  clusterLabelB = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
 
-  // buildingMarkersB.push(marker);
-
-  cluster.addLayer(marker);
+  clusterB.addLayer(marker);
 }
 
 const layout_b = L.geoJSON(Layout_B, {
   style: {
+    weight: .5,
     fillColor: "#F8820B",
-    fillOpacity: 0.6,
+    fillOpacity: 0.5,
     color: "black",
   },
 });
-const markerLayoutB = L.layerGroup([layout_b, ...buildingMarkersB]);
+const markerLayoutB = L.layerGroup([layout_b, clusterB]);
 markerLayoutB.addTo(map);
 //#endregion
 
 //#region 'Building Marker C'
-
+let clusterLabelC
 const classC = buildings.filter(
   (b) => b.classification === "Academic Buildings"
 );
-const buildingMarkersC = [];
+const clusterC = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    return L.divIcon({
+      className: "",
+      html: `<div class='marker-cluster c'><span>${clusterLabelC}</span></div>`,
+    });
+  },
+  disableClusteringAtZoom: 18,
+});
 for (let building of classC) {
   const marker = L.marker(
     [building.location.latitude, building.location.longtitude],
@@ -182,7 +272,8 @@ for (let building of classC) {
     (a, c) => `${a}/${c}`
   )}</p>
   <hr />
-  <p>Location: ${building.location.latitude}, ${
+  <p class='text-success mb-0'>${building.classification}</p>
+  <p class='mt-0'>Location: ${building.location.latitude}, ${
           building.location.longtitude
         }</p>
   `
@@ -195,29 +286,39 @@ for (let building of classC) {
     className: "",
     html: `<div class='circle-marker c'><span>${building.location.mapLabel}</span></div>`,
   });
+  clusterLabelC = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
 
-  // buildingMarkersC.push(marker);
 
-  cluster.addLayer(marker);
+  clusterC.addLayer(marker);
 }
 
 const layout_c = L.geoJSON(Layout_C, {
   style: {
+    weight: .5,
     fillColor: "#1111DD",
-    fillOpacity: 0.6,
+    fillOpacity: 0.5,
     color: "black",
   },
 });
-const markerLayoutC = L.layerGroup([layout_c, ...buildingMarkersC]);
+const markerLayoutC = L.layerGroup([layout_c, clusterC]);
 markerLayoutC.addTo(map);
 //#endregion
 
 //#region 'Building Marker D'
+let clusterLabelD
 const classD = buildings.filter(
   (b) => b.classification === "Research, Extension, and Training"
 );
-const buildingMarkersD = [];
+const clusterD = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    return L.divIcon({
+      className: "",
+      html: `<div class='marker-cluster d'><span>${clusterLabelD}</span></div>`,
+    });
+  },
+  disableClusteringAtZoom: 18,
+});
 for (let building of classD) {
   const marker = L.marker(
     [building.location.latitude, building.location.longtitude],
@@ -243,7 +344,8 @@ for (let building of classD) {
     (a, c) => `${a}/${c}`
   )}</p>
   <hr />
-  <p>Location: ${building.location.latitude}, ${
+  <p class='text-success mb-0'>${building.classification}</p>
+  <p class='mt-0'>Location: ${building.location.latitude}, ${
           building.location.longtitude
         }</p>
   `
@@ -256,30 +358,39 @@ for (let building of classD) {
     className: "",
     html: `<div class='circle-marker d'><span>${building.location.mapLabel}</span></div>`,
   });
+  clusterLabelD = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
 
-  // buildingMarkersD.push(marker);
-
-  cluster.addLayer(marker);
+  clusterD.addLayer(marker);
 }
 const layout_d = L.geoJSON(Layout_D, {
   style: {
+    weight: .5,
     fillColor: "#E0E038",
-    fillOpacity: 0.6,
+    fillOpacity: 0.5,
     color: "black",
   },
 });
 
-const markerLayoutD = L.layerGroup([layout_d, ...buildingMarkersD]);
+const markerLayoutD = L.layerGroup([layout_d, clusterD]);
 markerLayoutD.addTo(map);
 
 //#endregion
 
 //#region 'Building Marker E'
+let clusterLabelE
 const classE = buildings.filter(
   (b) => b.classification === "Housing Facilities"
 );
-const buildingMarkersE = [];
+const clusterE = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    return L.divIcon({
+      className: "",
+      html: `<div class='marker-cluster e'><span>${clusterLabelE}</span></div>`,
+    });
+  },
+  disableClusteringAtZoom: 18,
+});
 for (let building of classE) {
   const marker = L.marker(
     [building.location.latitude, building.location.longtitude],
@@ -305,7 +416,8 @@ for (let building of classE) {
     (a, c) => `${a}/${c}`
   )}</p>
   <hr />
-  <p>Location: ${building.location.latitude}, ${
+  <p class='text-success mb-0'>${building.classification}</p>
+  <p class='mt-0'>Location: ${building.location.latitude}, ${
           building.location.longtitude
         }</p>
   `
@@ -318,29 +430,38 @@ for (let building of classE) {
     className: "",
     html: `<div class='circle-marker e'><span>${building.location.mapLabel}</span></div>`,
   });
+  clusterLabelE = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
 
-  // buildingMarkersE.push(marker);
-
-  cluster.addLayer(marker);
+  clusterE.addLayer(marker);
 }
 
 const layout_e = L.geoJSON(Layout_E, {
   style: {
+    weight: .5,
     fillColor: "#D71275",
-    fillOpacity: 0.6,
+    fillOpacity: 0.5,
     color: "black",
   },
 });
-const markerLayoutE = L.layerGroup([layout_e, ...buildingMarkersE]);
+const markerLayoutE = L.layerGroup([layout_e, clusterE]);
 markerLayoutE.addTo(map);
 //#endregion
 
 //#region 'Building Marker F'
+let clusterLabelF
 const classF = buildings.filter(
   (b) => b.classification === "Sports and Recreational Facilities"
 );
-const buildingMarkersF = [];
+const clusterF = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    return L.divIcon({
+      className: "",
+      html: `<div class='marker-cluster f'><span>${clusterLabelF}</span></div>`,
+    });
+  },
+  disableClusteringAtZoom: 18,
+});
 for (let building of classF) {
   const marker = L.marker(
     [building.location.latitude, building.location.longtitude],
@@ -366,7 +487,8 @@ for (let building of classF) {
     (a, c) => `${a}/${c}`
   )}</p>
   <hr />
-  <p>Location: ${building.location.latitude}, ${
+  <p class='text-success mb-0'>${building.classification}</p>
+  <p class='mt-0'>Location: ${building.location.latitude}, ${
           building.location.longtitude
         }</p>
   `
@@ -379,26 +501,37 @@ for (let building of classF) {
     className: "",
     html: `<div class='circle-marker f'><span>${building.location.mapLabel}</span></div>`,
   });
+  clusterLabelF = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
 
-  // buildingMarkersF.push(marker);
-  cluster.addLayer(marker);
+
+  clusterF.addLayer(marker);
 }
 const layout_f = L.geoJSON(Layout_F, {
   style: {
+    weight: .5,
     fillColor: "#1EEFEF",
-    fillOpacity: 0.6,
+    fillOpacity: 0.5,
     color: "black",
   },
 });
-const markerLayoutF = L.layerGroup([layout_f, ...buildingMarkersF]);
+const markerLayoutF = L.layerGroup([layout_f, clusterF]);
 markerLayoutF.addTo(map);
 
 //#endregion
 
 //#region 'Building Marker G'
+let clusterLabelG
 const classG = buildings.filter((b) => b.classification === "Utilities");
-const buildingMarkersG = [];
+const clusterG = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    return L.divIcon({
+      className: "",
+      html: `<div class='marker-cluster g'><span>${clusterLabelG}</span></div>`,
+    });
+  },
+  disableClusteringAtZoom: 18,
+});
 for (let building of classG) {
   const marker = L.marker(
     [building.location.latitude, building.location.longtitude],
@@ -424,7 +557,8 @@ for (let building of classG) {
     (a, c) => `${a}/${c}`
   )}</p>
   <hr />
-  <p>Location: ${building.location.latitude}, ${
+  <p class='text-success mb-0'>${building.classification}</p>
+  <p class='mt-0'>Location: ${building.location.latitude}, ${
           building.location.longtitude
         }</p>
   `
@@ -437,26 +571,35 @@ for (let building of classG) {
     className: "",
     html: `<div class='circle-marker g'><span>${building.location.mapLabel}</span></div>`,
   });
+  clusterLabelG = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
 
-  // buildingMarkersG.push(marker);
-
-  cluster.addLayer(marker);
+  clusterG.addLayer(marker);
 }
 const layout_g = L.geoJSON(Layout_G, {
   style: {
+    weight: .5,
     fillColor: "#D20D0D",
-    fillOpacity: 0.6,
+    fillOpacity: 0.5,
     color: "black",
   },
 });
-const markerLayoutG = L.layerGroup([layout_g, ...buildingMarkersG]);
+const markerLayoutG = L.layerGroup([layout_g, clusterG]);
 markerLayoutG.addTo(map);
 //#endregion
 
 //#region 'Building Marker H'
+let clusterLabelH
 const classH = buildings.filter((b) => b.classification === "Other Structures");
-const buildingMarkersH = [];
+const clusterH = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    return L.divIcon({
+      className: "",
+      html: `<div class='marker-cluster h'><span>${clusterLabelH}</span></div>`,
+    });
+  },
+  disableClusteringAtZoom: 18,
+});
 for (let building of classH) {
   const marker = L.marker(
     [building.location.latitude, building.location.longtitude],
@@ -482,7 +625,8 @@ for (let building of classH) {
     (a, c) => `${a}/${c}`
   )}</p>
   <hr />
-  <p>Location: ${building.location.latitude}, ${
+  <p class='text-success mb-0'>${building.classification}</p>
+  <p class='mt-0'>Location: ${building.location.latitude}, ${
           building.location.longtitude
         }</p>
   `
@@ -495,24 +639,31 @@ for (let building of classH) {
     className: "",
     html: `<div class='circle-marker h'><span>${building.location.mapLabel}</span></div>`,
   });
+  clusterLabelH = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
 
-  // buildingMarkersH.push(marker);
-
-  cluster.addLayer(marker);
+  clusterH.addLayer(marker);
 }
 const layout_h = L.geoJSON(Layout_H, {
   style: {
+    weight: .5,
     fillColor: "#16E816",
-    fillOpacity: 0.6,
+    fillOpacity: 0.5,
     color: "black",
   },
 });
-const markerLayoutH = L.layerGroup([layout_h, ...buildingMarkersH]);
+const markerLayoutH = L.layerGroup([layout_h, clusterH]);
 markerLayoutH.addTo(map);
 //#endregion
 
-cluster.addTo(map);
+clusterA.addTo(map);
+clusterB.addTo(map)
+clusterC.addTo(map)
+clusterD.addTo(map)
+clusterE.addTo(map)
+clusterF.addTo(map)
+clusterG.addTo(map)
+clusterH.addTo(map)
 // Layer Controllers
 const baseMaps = {
   "Google Satellite": googleSat,

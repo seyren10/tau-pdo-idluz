@@ -6,35 +6,52 @@
   text-align: center;
   font-size: 9px;
   font-weight: bold;
-  padding: 2px;
+  padding: 4px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
-.circle-marker.a {
+.circle-marker.a, .a {
   background-color: red;
 }
 
-.circle-marker.b {
+.circle-marker.b, .b{
   background-color: #f8820b;
 }
 
-.circle-marker.c {
+.circle-marker.c, .c{
   background-color: #1111DD;
 }
-.circle-marker.d {
+.circle-marker.d, .d{
   background-color: #E0E038;
 }
-.circle-marker.e {
+.circle-marker.e, .e {
   background-color: #D71275;
 }
 
-.circle-marker.f {
+.circle-marker.f, .f {
   background-color: #1EEFEF;
 }
 
-.circle-marker.g {
+.circle-marker.g, .g {
   background-color: #D20D0D;
 }
-.circle-marker.h {
+.circle-marker.h, .h {
   background-color: #16E816;
+}
+
+.marker-cluster {
+  display: inline-block;
+  border-radius: 50%;
+  border: .2em solid white;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  padding: .5em 1.5em;
+  opacity: .9;
+  /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); */
+}
+
+.reduce {
+  padding: .2em 1em;
 }
