@@ -6,43 +6,17 @@ const ExpressError = require("../utils/ExpressError");
 
 //index
 module.exports.index = async (req, res) => {
-  const {
-    name: filteredName,
-    typology: filteredTypology,
-    classification: filteredClassification,
-  } = req.query;
+  const { name: filteredName, typology: filteredTypology, classification: filteredClassification } = req.query;
   const regex = new RegExp(filteredName, "i");
   const regexTypology = new RegExp(filteredTypology, "i");
   const regexClassification = new RegExp(filteredClassification, "i");
 
-  const currentPage = req.query.page || 1;
-  const perPage = 20;
-
-  // const buildings = await Building.find({
-  //   name: { $regex: regex },
-  //   typologies: { $in: regexTypology },
-  //   classification: regexClassification,
-  // });
-
-  const buildings = await Building.paginate(
-    {
-      name: { $regex: regex },
-      typologies: { $in: regexTypology },
-      classification: regexClassification,
-    },
-    { page: currentPage, limit: perPage }
-  );
-
-  const storedQuery = req.query
-  // console.dir(req.query)
-
-  res.render("buildings", {
-    buildings,
-    filteredTypology,
-    filteredName,
-    filteredClassification,
-    storedQuery
+  const buildings = await Building.find({
+    name: { $regex: regex },
+    typologies: { $in: regexTypology },
+    classification: regexClassification
   });
+  res.render("buildings", { buildings, filteredTypology, filteredName, filteredClassification });
 };
 
 //get the last record and increase the index to 1
@@ -80,7 +54,7 @@ module.exports.create = async (req, res) => {
 
   newBuilding.typologies = req.body.typologies;
   newBuilding.location = req.body.location;
-  const label = await setMapLabel(null, req.body);
+  const label = await setMapLabel(null,req.body);
   newBuilding.location.mapLabel = label;
 
   await newBuilding.save();

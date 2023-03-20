@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const mongoosePaginate = require('mongoose-paginate-v2')
 const {typologies} = require('./categories/typologies');
 const {classifications} = require('./categories/classifications')
 const {sensitivitySchema} = require('../models/sensitivity')
@@ -33,7 +32,6 @@ const buildingSchema = new mongoose.Schema({
   sensitivity: sensitivitySchema,
 });
 
-buildingSchema.plugin(mongoosePaginate);
 const Building = mongoose.model("Building", buildingSchema);
 module.exports = {
   Building,
