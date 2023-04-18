@@ -1,15 +1,19 @@
 <%- layout('layouts/boilerplate') %>
-<link rel="stylesheet" href="/styles/marker-styles.css">
+<link rel="stylesheet" href="/styles/marker-styles.css" />
 
 <div class="d-flex align-items-center gap-3">
   <div>
-    <img src="/images/tau.png" alt="" class="img-fluid" width="80px"/>
+    <img src="/images/tau.png" alt="" class="img-fluid" width="80px" />
   </div>
   <div>
     <h5 class="mb-0">Tarlac Agricultural University</h5>
     <p class="fw-light fs-5 py-0 my-0">CAMPUS MASTER DEVELOPMENT PLAN</p>
   </div>
- 
+  <div class="ms-auto">
+    <form action="/reports/download-master-plan">
+      <button class="btn btn-success"><i class="fa-solid fa-download"></i> Download this map</button>
+    </form>
+  </div>
 </div>
 <div id="map" class="card shadow-lg"></div>
 <script>

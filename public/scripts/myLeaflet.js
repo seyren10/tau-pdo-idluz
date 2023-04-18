@@ -32,61 +32,61 @@ const maplayout = L.geoJSON(TAU_Layout, {
 maplayout.addTo(map);
 
 
-map.on('zoom',()=>{
-  const currentZoom = map.getZoom();
-  console.log(currentZoom)
+// map.on('zoom',()=>{
+//   const currentZoom = map.getZoom();
+//   console.log(currentZoom)
 
-  if(currentZoom >=17){
-    clusterA.options.iconCreateFunction = function (cluster){
-      return L.divIcon({
-        className: '',
-        html: `<div class='marker-cluster a reduce'><span>${clusterLabelA}</span></div>`,
-      })
-    }
-    clusterB.options.iconCreateFunction = function (cluster){
-      return L.divIcon({
-        className: '',
-        html: `<div class='marker-cluster b reduce'><span>${clusterLabelB}</span></div>`,
-      })
-    }
-    clusterC.options.iconCreateFunction = function (cluster){
-      return L.divIcon({
-        className: '',
-        html: `<div class='marker-cluster c reduce'><span>${clusterLabelC}</span></div>`,
-      })
-    }
-    clusterD.options.iconCreateFunction = function (cluster){
-      return L.divIcon({
-        className: '',
-        html: `<div class='marker-cluster d reduce'><span>${clusterLabelD}</span></div>`,
-      })
-    }
-    clusterE.options.iconCreateFunction = function (cluster){
-      return L.divIcon({
-        className: '',
-        html: `<div class='marker-cluster e reduce'><span>${clusterLabelE}</span></div>`,
-      })
-    }
-    clusterF.options.iconCreateFunction = function (cluster){
-      return L.divIcon({
-        className: '',
-        html: `<div class='marker-cluster f reduce'><span>${clusterLabelF}</span></div>`,
-      })
-    }
-    clusterG.options.iconCreateFunction = function (cluster){
-      return L.divIcon({
-        className: '',
-        html: `<div class='marker-cluster g reduce'><span>${clusterLabelG}</span></div>`,
-      })
-    }
-    clusterH.options.iconCreateFunction = function (cluster){
-      return L.divIcon({
-        className: '',
-        html: `<div class='marker-cluster h reduce'><span>${clusterLabelH}</span></div>`,
-      })
-    }
-  }
-})
+//   if(currentZoom >=17){
+//     clusterA.options.iconCreateFunction = function (cluster){
+//       return L.divIcon({
+//         className: '',
+//         html: `<div class='marker-cluster a reduce'><span>${clusterLabelA}</span></div>`,
+//       })
+//     }
+//     clusterB.options.iconCreateFunction = function (cluster){
+//       return L.divIcon({
+//         className: '',
+//         html: `<div class='marker-cluster b reduce'><span>${clusterLabelB}</span></div>`,
+//       })
+//     }
+//     clusterC.options.iconCreateFunction = function (cluster){
+//       return L.divIcon({
+//         className: '',
+//         html: `<div class='marker-cluster c reduce'><span>${clusterLabelC}</span></div>`,
+//       })
+//     }
+//     clusterD.options.iconCreateFunction = function (cluster){
+//       return L.divIcon({
+//         className: '',
+//         html: `<div class='marker-cluster d reduce'><span>${clusterLabelD}</span></div>`,
+//       })
+//     }
+//     clusterE.options.iconCreateFunction = function (cluster){
+//       return L.divIcon({
+//         className: '',
+//         html: `<div class='marker-cluster e reduce'><span>${clusterLabelE}</span></div>`,
+//       })
+//     }
+//     clusterF.options.iconCreateFunction = function (cluster){
+//       return L.divIcon({
+//         className: '',
+//         html: `<div class='marker-cluster f reduce'><span>${clusterLabelF}</span></div>`,
+//       })
+//     }
+//     clusterG.options.iconCreateFunction = function (cluster){
+//       return L.divIcon({
+//         className: '',
+//         html: `<div class='marker-cluster g reduce'><span>${clusterLabelG}</span></div>`,
+//       })
+//     }
+//     clusterH.options.iconCreateFunction = function (cluster){
+//       return L.divIcon({
+//         className: '',
+//         html: `<div class='marker-cluster h reduce'><span>${clusterLabelH}</span></div>`,
+//       })
+//     }
+//   }
+// })
 
 // #region 'Marker class A'
 // Markers per classifications
@@ -97,7 +97,8 @@ const clusterA = L.markerClusterGroup({
     console.dir(cluster)
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster a'><span>${clusterLabelA}</span></div>`,
+      // html: `<div class='marker-cluster a'><span>${clusterLabelA}</span></div>`,
+      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelA}</p></div>`
     });
   },
   disableClusteringAtZoom: 18,
@@ -144,7 +145,7 @@ for (let building of classA) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker a'><span>${building.location.mapLabel}</span></div>`,
+    html: `<div class='circle-marker'><img src=/images/building-start.png /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelA = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -171,7 +172,7 @@ const clusterB = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster b'><span>${clusterLabelB}</span></div>`,
+      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelB}</p></div>`
     });
   },
   disableClusteringAtZoom: 18,
@@ -213,7 +214,7 @@ for (let building of classB) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker b'><span>${building.location.mapLabel}</span></div>`,
+    html: `<div class='circle-marker'><img src=/images/building-gear.png /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelB = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -242,7 +243,7 @@ const clusterC = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster c'><span>${clusterLabelC}</span></div>`,
+      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelC}</p></div>`
     });
   },
   disableClusteringAtZoom: 18,
@@ -284,7 +285,7 @@ for (let building of classC) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker c'><span>${building.location.mapLabel}</span></div>`,
+    html: `<div class='circle-marker'><img src=/images/building-acad.png /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelC = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -314,7 +315,8 @@ const clusterD = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster d'><span>${clusterLabelD}</span></div>`,
+      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelD}</p></div>`
+
     });
   },
   disableClusteringAtZoom: 18,
@@ -356,7 +358,7 @@ for (let building of classD) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker d'><span>${building.location.mapLabel}</span></div>`,
+    html: `<div class='circle-marker'><img src=/images/building-globe.png /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelD = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -386,7 +388,8 @@ const clusterE = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster e'><span>${clusterLabelE}</span></div>`,
+      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelE}</p></div>`
+
     });
   },
   disableClusteringAtZoom: 18,
@@ -428,7 +431,7 @@ for (let building of classE) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker e'><span>${building.location.mapLabel}</span></div>`,
+    html: `<div class='circle-marker'><img src=/images/building-home.png /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelE = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -457,7 +460,8 @@ const clusterF = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster f'><span>${clusterLabelF}</span></div>`,
+      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelF}</p></div>`
+
     });
   },
   disableClusteringAtZoom: 18,
@@ -499,7 +503,7 @@ for (let building of classF) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker f'><span>${building.location.mapLabel}</span></div>`,
+    html: `<div class='circle-marker'><img src=/images/building-sport.png /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelF = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -527,7 +531,8 @@ const clusterG = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster g'><span>${clusterLabelG}</span></div>`,
+      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelG}</p></div>`
+
     });
   },
   disableClusteringAtZoom: 18,
@@ -569,7 +574,7 @@ for (let building of classG) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker g'><span>${building.location.mapLabel}</span></div>`,
+    html: `<div class='circle-marker'><img src=/images/building-repair.png /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelG = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -595,7 +600,7 @@ const clusterH = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster h'><span>${clusterLabelH}</span></div>`,
+      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelH}</p></div>`
     });
   },
   disableClusteringAtZoom: 18,
@@ -637,7 +642,7 @@ for (let building of classH) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker h'><span>${building.location.mapLabel}</span></div>`,
+    html: `<div class='circle-marker'><img src=/images/building-nav.png /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelH = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -671,14 +676,14 @@ const baseMaps = {
 };
 
 const overlayMaps = {
-  "Administrative and Support Services": markerLayoutA,
-  "Auxiliary Buildings and Production Facilities": markerLayoutB,
-  "Academic Buildings": markerLayoutC,
-  "Research, Extension, and Training": markerLayoutD,
-  "Housing Facilities": markerLayoutE,
-  "Sports and Recreational Facilities": markerLayoutF,
-  Utilities: markerLayoutG,
-  "Other Structures": markerLayoutH,
+  "A. Administrative and Support Services": markerLayoutA,
+  "B. Auxiliary Buildings and Production Facilities": markerLayoutB,
+  "C. Academic Buildings": markerLayoutC,
+  "D. Research, Extension, and Training": markerLayoutD,
+  "E. Housing Facilities": markerLayoutE,
+  "F.Sports and Recreational Facilities": markerLayoutF,
+  'G. Utilities': markerLayoutG,
+  "H. Other Structures": markerLayoutH,
 };
 
 const layerControl = L.control

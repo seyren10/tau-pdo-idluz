@@ -5,6 +5,18 @@
 body {
   font-family: "Raleway", sans-serif;
 }
+.background {
+  background-image: url('/images/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
 h1,
 h2,
 h3,
@@ -47,8 +59,8 @@ h5,
 }
 
 .pos-fixed-md {
-  position: static;
-  width: 100%;
+  position: fixed;
+  left: 0;
   z-index: 1;
   margin-top: -4px;
   padding-bottom: 1em;
@@ -61,6 +73,25 @@ h5,
   padding-bottom: 1em;
 }
 
+.bg-success, .btn-success, .active > .page-link {
+  background-color: #008000 !important;
+}
+
+.card-title a {
+  color: #008000 !important;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #008000;
+  background-color: #00800056;
+}
+
+
+.card {
+  background:white;
+  /* backdrop-filter: blur(5px); */
+  border-bottom: 3px solid grey;
+}
 @media screen and (width < 768px) {
   .fit {
     max-height: 300px;
@@ -71,7 +102,9 @@ h5,
 }
 
 @media screen and (width >= 768px){
-  .pos-fixed-md {
+  /* .pos-fixed-md {
     position: fixed;
-  }
+    left: 0;
+    right: 0;
+  } */
 }

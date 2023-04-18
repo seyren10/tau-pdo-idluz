@@ -1,57 +1,50 @@
 .circle-marker {
   display: inline-block;
-  border-radius: 50%;
-  border: 2px solid white;
-  color: whitesmoke;
+  color: white;
   text-align: center;
-  font-size: 9px;
+  font-size: .9em;
   font-weight: bold;
-  padding: 4px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
-.circle-marker.a, .a {
-  background-color: red;
+.circle-marker img {
+  height: 35px;
+  width: 35px;
 }
 
-.circle-marker.b, .b{
-  background-color: #f8820b;
-}
-
-.circle-marker.c, .c{
-  background-color: #1111DD;
-}
-.circle-marker.d, .d{
-  background-color: #E0E038;
-}
-.circle-marker.e, .e {
-  background-color: #D71275;
-}
-
-.circle-marker.f, .f {
-  background-color: #1EEFEF;
-}
-
-.circle-marker.g, .g {
-  background-color: #D20D0D;
-}
-.circle-marker.h, .h {
-  background-color: #16E816;
+.circle-marker p {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color:rgba(0, 0, 0, 0.5)
 }
 
 .marker-cluster {
   display: inline-block;
-  border-radius: 50%;
-  border: .2em solid white;
-  color: whitesmoke;
+  color: white;
   text-align: center;
   font-size: 1em;
   font-weight: bold;
-  padding: .5em 1.5em;
-  opacity: .9;
-  /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); */
+  position: relative;
 }
 
+.marker-cluster img {
+  height: 40px;
+  width: 40px;
+}
+
+.marker-cluster p {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -90%);
+  /* border-radius: 50%; */
+  display: block;
+  width: 80%;
+  background: rgba(134, 233, 98, 0.452);
+  padding: 0;
+  margin: 0;
+}
 .reduce {
-  padding: .2em 1em;
+  padding: 0.2em 1em;
 }

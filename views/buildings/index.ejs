@@ -1,17 +1,17 @@
 
 <%- layout('layouts/boilerplate') %>
 <!-- filter for medium and above devices -->
-<div class="row mt-0 pt-0 d-none d-md-flex">
-  <div class="col mt-0 pt-0">
-      <form action="/buildings" method="GET" class="row row-cols-lg-auto align-items-end pos-fixed-md bg-white">
-        <div class="col-12">
+<div class="row mt-0 pt-0 d-none d-md-flex position-relative">
+  <!-- <div class="col mt-0 pt-0"> -->
+      <form action="/buildings" method="GET" class="row align-items-end bg-white pos-fixed-md">
+        <div class="col-3">
           <label for="name" class="d-none d-md-block">Search by building name</label>
           <div class="input-group">
             <span class="input-group-text"> <i class="bi bi-search"></i></span>
             <input type="text" class="form-control" name="name" value="<%= filteredName %>"/>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-3">
           <label for="classification" class="d-none d-md-block">filter by building classification</label>
           <select name="classification" id="classification" class="form-select">
             <option value="" <%= !filteredClassification ? 'selected' : '' %>>All</option>
@@ -20,7 +20,7 @@
             <% }) %>
           </select>
         </div>
-        <div class="col-12 mb-3 mb-md-0">
+        <div class="col-3 mb-3 mb-md-0">
           <label for="typology" class="d-none d-md-block">filter by building typology</label>
           <select name="typology" id="typology" class="form-select">
             <option value="" <%= !filteredTypology ? 'selected' : '' %>>All</option>
@@ -29,15 +29,19 @@
             <% }) %>
           </select>
         </div>
-        <input type="submit" value="Search" class="btn btn-success">
+        <div class="col-3">
+          <!-- <input type="submit" value="Search" class="btn btn-success"> -->
+          <button type="submit" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+       
       </form>
-  </div>
+  <!-- </div> -->
 </div>
 <!-- filter for small devices -->
 <div class="row d-flex d-md-none">
   <div class="col pos-fixed-sm">
     <a class="btn btn-success" data-bs-toggle="offcanvas" href="#filterCanvas">
-      <i class="bi bi-funnel"></i>
+      <i class="fa-solid fa-filter"></i>
       Filter 
     </a>
   </div>
@@ -75,7 +79,8 @@
               <% }) %>
             </select>
           </div>
-          <input type="submit" value="Search" class="btn btn-success">
+          <!-- <input type="submit" value="Search" class="btn btn-success"> -->
+          <button type="submit" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>
     </div>

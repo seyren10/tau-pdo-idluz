@@ -1,0 +1,17 @@
+.download {
+    width: auto;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+}
+
+
+.download button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button img {
+    height: 3rem;
+}

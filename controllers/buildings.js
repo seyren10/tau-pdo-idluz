@@ -18,12 +18,6 @@ module.exports.index = async (req, res) => {
   const currentPage = req.query.page || 1;
   const perPage = 20;
 
-  // const buildings = await Building.find({
-  //   name: { $regex: regex },
-  //   typologies: { $in: regexTypology },
-  //   classification: regexClassification,
-  // });
-
   const buildings = await Building.paginate(
     {
       name: { $regex: regex },

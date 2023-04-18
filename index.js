@@ -75,11 +75,13 @@ app.use((req, res, next) => {
 });
 
 //ROUTES
+const reportsRoutes = require('./routes/reports')
 const userRoutes = require("./routes/users");
 const buildingRoutes = require("./routes/buildings");
 
 app.use("/admin", userRoutes);
 app.use("/buildings", buildingRoutes);
+app.use('/reports', reportsRoutes)
 
 //HOME
 const { Building } = require("./models/building");
