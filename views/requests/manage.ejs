@@ -1,0 +1,44 @@
+<%- layout('layouts/boilerplate') %>
+<table class="table table-stripped overflow-hidden">
+  <thead>
+    <th>Building Name</th>
+    <th>Full Name</th>
+    <th>Contact No.</th>
+    <th>Company</th>
+    <th>Position</th>
+    <th>Email</th>
+    <th>Purpose</th>
+    <th>Email Actions</th>
+  </thead>
+  <tbody>
+    <% for(let request of requests) { %>
+
+    <tr>
+      <td class="fw-bold"><%= request.buildingName %></td>
+      <td><%= request.fullName %></td>
+      <td><%= request.contactNo %></td>
+      <td><%= request.company %></td>
+      <td><%= request.position %></td>
+      <td><%= request.email %></td>
+      <td><%= request.purpose %></td>
+      <td class="d-flex gap-1">
+        <a
+          href="<%= `/request/send?email=${request.email}&name=${request.fullName}&building=${request.buildingName}&id=${request._id}&approve=true` %>"
+          class="btn btn-sm btn-primary"
+          ><i class="fa-solid fa-circle-check"></i>Approve</a
+        >
+        <a
+          href="<%= `/request/send?email=${request.email}&name=${request.fullName}&building=${request.buildingName}&id=${request._id}&approve=false` %>"
+          class="btn btn-sm btn-danger"
+          ><i class="fa-solid fa-circle-xmark"></i>Deny</a
+        >
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+<% if(requests.length === 0) {%>
+  <div class="bg-secondary p-3 rounded text-white text-center w-25 mx-auto">
+    <h5 class="fw-light">NO REQUESTS FOUND</h5>
+  </div>
+  <% } %>

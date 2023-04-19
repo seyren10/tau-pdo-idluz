@@ -20,7 +20,7 @@
     <% if(currentUser) {%>
     <div class="rounded-pill px-2 border border-1 border-white">
       <span class="navbar-brand" href="/" style="font-size: 1.1em">
-        <i class="fa-solid fa-user-tie"></i>  <%= currentUser.nickName%></span
+        <i class="fa-solid fa-user-tie"></i> <%= currentUser.nickName%></span
       >
     </div>
     <% } %>
@@ -33,32 +33,51 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-    <!-- <i class="fa-solid fa-bars"></i> -->
-    <i class="fa-solid fa-up-down"></i>
+      <!-- <i class="fa-solid fa-bars"></i> -->
+      <i class="fa-solid fa-up-down"></i>
       <!-- <span class="navbar-toggler-icon"></span> -->
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/"><i class="fa-solid fa-house"></i>  Home</a>
+          <a class="nav-link" href="/"
+            ><i class="fa-solid fa-house"></i> Home</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/buildings"><i class="fa-solid fa-building"></i>  Buildings</a>
+          <a class="nav-link" href="/buildings"
+            ><i class="fa-solid fa-building"></i> Buildings</a
+          >
+        </li>
+
+        <% if(!currentUser) {%>
+        <li class="nav-item">
+          <a class="nav-link" href="/reports"
+            ><i class="fa-solid fa-table"></i> Building Report</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/reports"><i class="fa-solid fa-table"></i>  Building Report</a>
+          <a class="nav-link" href="/request"
+            ><i class="fa-solid fa-file-circle-check"></i> Request</a
+          >
+        </li>
+        <% } %> <% if(currentUser) {%>
+        <li class="nav-item">
+          <a class="nav-link" href="/request/manage"
+            ><i class="fa-solid fa-file-circle-check"></i> Manage Request</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-file-circle-check"></i>  Request</a>
+          <a class="nav-link" href="/buildings/new"
+            ><i class="fa-solid fa-square-plus"></i> Add Building</a
+          >
         </li>
-        <% if(currentUser) {%>
         <li class="nav-item">
-          <a class="nav-link" href="/buildings/new"><i class="fa-solid fa-square-plus"></i>  Add Building</a>
+          <a class="nav-link" href="/admin/logout"
+            ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+          >
         </li>
-       <li class="nav-item">
-          <a class="nav-link" href="/admin/logout"><i class="fa-solid fa-right-from-bracket"></i>  Logout</a>
-        </li> 
         <% } %>
       </ul>
     </div>

@@ -1,0 +1,114 @@
+<%- layout('layouts/boilerplate') %>
+<div class="row">
+  <div class="col-md-6 offset-md-3 border rounded shadow p-3 bg-body-secondary">
+    <img src="/images/tau_banner.png" alt="" class="img-fluid" />
+    <h4 class="text-center text-uppercase pb-3">
+      Building floor plan request form
+    </h4>
+    <form action="/request" method="POST">
+      <div class="row">
+        <div class="col-12">
+          <label for="buildingOption" class="form-label">Building Name</label>
+          <input
+            class="form-control"
+            list="buildingList"
+            id="buildingOption"
+            placeholder="Type to search..."
+            name="request[building]"
+            value="<%= buildingName !== null ? buildingName : '' %>"
+            required
+          />
+          <datalist id="buildingList">
+            <% for(let building of buildings) { %>
+            <option value="<%= building.name %>"><% } %></option>
+          </datalist>
+
+          <p class="mt-2" style="font-size: 0.75rem">
+            <i class="fa-solid fa-circle-info text-info"></i> You can go to
+            <a href="/buildings">Buildings</a> to search for a building you want
+            to request and press request for better searching exprerience
+          </p>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="request[name]"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="contact">Contact No.</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="contact"
+            name="request[contact]"
+            minlength="11"
+            maxlength="11"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="company">Company Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="company"
+            name="request[company]"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="position">Position</label>
+          <input
+            type="text"
+            class="form-control"
+            id="position"
+            name="request[position]"
+            required
+          />
+        </div>
+        <div class="col-6 mb-3">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="request[email]"
+            required
+          />
+        </div>
+        <div class="col-6 mb-3">
+          <p style="font-size: 0.8rem">
+            <span class="text-warning"
+              ><i class="fa-solid fa-triangle-exclamation"></i>
+              <strong>Important</strong></span
+            >: Please make sure to enter a valid email address as the file will
+            be sent to this address, and it's also where you can check the
+            status of your request.
+          </p>
+        </div>
+        <div class="col-12 mb-3">
+          <label for="purpose">Purpose</label>
+          <textarea
+            class="form-control"
+            name="request[purpose]"
+            id="purpose"
+            cols="30"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="col-md-6">
+          <input
+            type="submit"
+            value="Send Request"
+            class="form-control btn btn-success flex-fill"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
