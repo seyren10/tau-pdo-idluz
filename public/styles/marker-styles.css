@@ -24,7 +24,7 @@
   color: white;
   text-align: center;
   font-size: 1em;
-  font-weight: bold;
+  font-weight: 900;
   position: relative;
 }
 
@@ -41,7 +41,7 @@
   /* border-radius: 50%; */
   display: block;
   width: 80%;
-  background: rgba(134, 233, 98, 0.452);
+  background: rgba(0, 0, 0, 0.452);
   padding: 0;
   margin: 0;
 }

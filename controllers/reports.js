@@ -69,20 +69,19 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.download = (req, res) => {
-  res.download(
-    path.join(
-      __dirname,
-      "../",
-      "public",
-      "reports",
-      "generated",
-      "report.xlsx"
-    ),
-    `generated_report_${Date.now()}.xlsx`,
-    (err) => {
-      if (err) throw new Error("Failed to send report file.", err);
-    }
+  const filePath = path.join(
+    __dirname,
+    "../",
+    "public",
+    "reports",
+    "generated",
+    "report.xlsx"
   );
+
+  const fileName = `generated_report_${Date.now()}.xlsx`;
+  res.download(filePath, fileName, (err) => {
+    if (err) throw new Error("Failed to send report file.", err);
+  });
 };
 
 module.exports.downloadMasterPlan = (req, res) => {

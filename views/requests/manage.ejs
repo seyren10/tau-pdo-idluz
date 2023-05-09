@@ -1,44 +1,48 @@
 <%- layout('layouts/boilerplate') %>
-<table class="table table-stripped overflow-hidden">
-  <thead>
-    <th>Building Name</th>
-    <th>Full Name</th>
-    <th>Contact No.</th>
-    <th>Company</th>
-    <th>Position</th>
-    <th>Email</th>
-    <th>Purpose</th>
-    <th>Email Actions</th>
-  </thead>
-  <tbody>
-    <% for(let request of requests) { %>
+<link rel="stylesheet" href="/styles/table.css" />
 
-    <tr>
-      <td class="fw-bold"><%= request.buildingName %></td>
-      <td><%= request.fullName %></td>
-      <td><%= request.contactNo %></td>
-      <td><%= request.company %></td>
-      <td><%= request.position %></td>
-      <td><%= request.email %></td>
-      <td><%= request.purpose %></td>
-      <td class="d-flex gap-1">
+<div class="evaluations">
+  <div class="eval-title">List of Requests</div>
+  <div class="eval-body">
+    <div class="eval-headers-8">
+      <h5>Building Name</h5>
+      <h5>Full Name</h5>
+      <h5>Contact No.</h5>
+      <h5>Company</h5>
+      <h5>Position</h5>
+      <h5>Email</h5>
+      <h5>Purpose</h5>
+      <h5>Email Actions</h5>
+    </div>
+    <% for(let i = 0; i < requests.length;i++ ) {%> <% const request =
+    requests[i] %>
+    <div class="eval-item-8 <%= i % 2 === 0 ? 'striped' :'' %>">
+      <div class="fw-bold"><%= request.buildingName %></div>
+      <div><%= request.fullName %></div>
+      <div><%= request.contactNo %></div>
+      <div><%= request.company %></div>
+      <div><%= request.position %></div>
+      <div><%= request.email %></div>
+      <div><%= request.purpose %></div>
+      <div class="d-flex gap-1" style="height:fit-content; justify-content: end;">
         <a
           href="<%= `/request/send?email=${request.email}&name=${request.fullName}&building=${request.buildingName}&id=${request._id}&approve=true` %>"
           class="btn btn-sm btn-primary"
-          ><i class="fa-solid fa-circle-check"></i>Approve</a
-        >
+          ><img src="/icons/mail-yes.svg" width="25px" > Approve
+          </a>
         <a
           href="<%= `/request/send?email=${request.email}&name=${request.fullName}&building=${request.buildingName}&id=${request._id}&approve=false` %>"
           class="btn btn-sm btn-danger"
-          ><i class="fa-solid fa-circle-xmark"></i>Deny</a
-        >
-      </td>
-    </tr>
+          ><img src="/icons/mail-no.svg" width="25px" >Deny
+          </a>
+      </div>
+    </div>
     <% } %>
-  </tbody>
-</table>
-<% if(requests.length === 0) {%>
-  <div class="bg-secondary p-3 rounded text-white text-center w-25 mx-auto">
-    <h5 class="fw-light">NO REQUESTS FOUND</h5>
   </div>
-  <% } %>
+</div>
+
+<% if(requests.length === 0) {%>
+<div class="bg-secondary p-3 rounded text-white text-center w-25 mx-auto">
+  <h5 class="fw-light">NO REQUESTS FOUND</h5>
+</div>
+<% } %>

@@ -79,11 +79,13 @@ const reportsRoutes = require("./routes/reports");
 const userRoutes = require("./routes/users");
 const buildingRoutes = require("./routes/buildings");
 const requestRoutes = require("./routes/requests");
+const evaluationRoutes = require("./routes/evaluation");
 
 app.use("/admin", userRoutes);
 app.use("/buildings", buildingRoutes);
 app.use("/reports", reportsRoutes);
 app.use("/request", requestRoutes);
+app.use("/evaluation", evaluationRoutes);
 
 //HOME
 const { Building } = require("./models/building");

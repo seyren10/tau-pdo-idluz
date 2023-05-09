@@ -20,7 +20,7 @@
     <% if(currentUser) {%>
     <div class="rounded-pill px-2 border border-1 border-white">
       <span class="navbar-brand" href="/" style="font-size: 1.1em">
-        <i class="fa-solid fa-user-tie"></i> <%= currentUser.nickName%></span
+        <img src="/icons/admin.svg" width="30px" /> <%= currentUser.nickName%></span
       >
     </div>
     <% } %>
@@ -42,40 +42,51 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" href="/"
-            ><i class="fa-solid fa-house"></i> Home</a
+            ><img src="/icons/map.svg" width="30px" />  Home</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/buildings"
-            ><i class="fa-solid fa-building"></i> Buildings</a
+            ><img src="/icons/building.svg" width="23px" />  Buildings</a
           >
         </li>
 
         <% if(!currentUser) {%>
         <li class="nav-item">
           <a class="nav-link" href="/reports"
-            ><i class="fa-solid fa-table"></i> Building Report</a
+            ><img src="/icons/report.svg" width="30px" /> Building Report</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/request"
-            ><i class="fa-solid fa-file-circle-check"></i> Request</a
+            ><img src="/icons/request.svg" width="30px" /> Request</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/evaluation/new"
+            ><img src="/icons/feedback.svg" width="30px" />  Feedback</a
           >
         </li>
         <% } %> <% if(currentUser) {%>
+
         <li class="nav-item">
-          <a class="nav-link" href="/request/manage"
-            ><i class="fa-solid fa-file-circle-check"></i> Manage Request</a
+          <a class="nav-link" href="/buildings/new"
+            ><img src="/icons/add.svg" width="30px" />  Add Building</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/buildings/new"
-            ><i class="fa-solid fa-square-plus"></i> Add Building</a
+          <a class="nav-link" href="/request/manage"
+            ><img src="/icons/request.svg" width="30px" />  Requests</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/evaluation"
+            ><img src="/icons/evaluation.svg" width="30px" />  Evaluations</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/admin/logout"
-            ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+            ><img src="/icons/logout.svg" width="30px" />  Logout</a
           >
         </li>
         <% } %>

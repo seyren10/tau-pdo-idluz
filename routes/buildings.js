@@ -34,13 +34,13 @@ router
 //sensitivity
 router.get(
   "/:id/sensitivity/new",
-
-  catchAsync(isLoggedIn, sensitivityControllers.new)
+  isLoggedIn,
+  catchAsync(sensitivityControllers.new)
 );
 router.post(
   "/:id/sensitivity",
-
-  catchAsync(isLoggedIn, sensitivityControllers.create)
+  isLoggedIn,
+  catchAsync(sensitivityControllers.create)
 );
 
 module.exports = router;

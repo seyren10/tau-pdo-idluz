@@ -1,0 +1,560 @@
+<link rel="stylesheet" href="/styles/evaluation.css">
+<%- layout('layouts/boilerplate') %>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+  Please leave your feedback to help us improve our services. Thank you.
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<div class="row">
+  <div class="col-md-6 offset-md-3 border rounded shadow p-3 bg-body-secondary">
+    <img src="/images/tau_banner.png" alt="" class="img-fluid" />
+    <h4 class="text-center text-uppercase pb-3">CLIENT'S FEEDBACK FORM</h4>
+    <form action="/evaluation" method="POST">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="visitDate">Date of Visit</label>
+          <input
+            type="date"
+            class="form-control"
+            id="visitDate"
+            name="evaluator[visitDate]"
+            required
+          />
+        </div>
+        <div class="col-sm-6 col-md-3 mb-3">
+          <label for="timeIn">Time In</label>
+          <input
+            type="time"
+            class="form-control"
+            id="timeIn"
+            name="evaluator[timeIn]"
+            required
+          />
+        </div>
+        <div class="col-sm-6 col-md-3 mb-3">
+          <label for="timeOut">Time Out</label>
+          <input
+            type="time"
+            class="form-control"
+            id="timeOut"
+            name="evaluator[timeOut]"
+            required
+          />
+        </div>
+        <div class="col-12 mb-3">
+          <label for="visited">Person/Office Visited</label>
+          <input
+            type="text"
+            class="form-control"
+            id="visited"
+            name="evaluator[visited]"
+            required
+          />
+        </div>
+        <div class="col-12 mb-3">
+          <label for="service">Service Requested</label>
+          <textarea
+            class="form-control"
+            name="evaluator[service]"
+            id="service"
+            cols="30"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+
+        <div class="col-12 mb-3">
+          <label for="clientName"
+            >Name of Client
+            <span class="text-secondary" style="font-size: 0.8rem"
+              >(optional)</span
+            ></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="clientName"
+            name="evaluator[clientName]"
+          />
+        </div>
+        <!-- CLIENT TYPE -->
+        <div class="col-4 mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="evaluator[clientType]"
+              id="facultyStaff"
+              value="facultyStaff"
+            />
+            <label class="form-check-label" for="facultyStaff">
+              Faculty/Staff
+            </label>
+          </div>
+        </div>
+        <div class="col-4 mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="evaluator[clientType]"
+              id="student"
+              value="student"
+            />
+            <label class="form-check-label" for="student"> Student </label>
+          </div>
+        </div>
+        <div class="col-4 mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="evaluator[clientType]"
+              id="visitor"
+              value="visitor"
+            />
+            <label class="form-check-label" for="visitor"> Visitor </label>
+          </div>
+        </div>
+        <!-- END OF CLIENT TYPE -->
+        <hr />
+        <div class="col-4 mb-3">Sex:</div>
+        <div class="col-4 mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="evaluator[sex]"
+              id="male"
+              value="male"
+            />
+            <label class="form-check-label" for="male"> Male </label>
+          </div>
+        </div>
+        <div class="col-4 mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="evaluator[sex]"
+              id="female"
+              value="female"
+            />
+            <label class="form-check-label" for="female"> Female </label>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3">
+          <label for="visited"
+            >Agency/Company Affiliated
+            <span class="text-secondary" style="font-size: 0.8rem"
+              >(if applicable)</span
+            ></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="company"
+            name="evaluator[company]"
+          />
+        </div>
+        <div class="col-12">
+          <table class="table">
+            <caption style="caption-side: top">
+              Legend
+            </caption>
+            <tbody>
+              <tr>
+                <td>
+                  VS - <b><u>Very Satisfied</u></b>
+                </td>
+                <td>
+                  D - <b><u>Dissatisfied</u></b>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  S - <b><u>Satisfied</u></b>
+                </td>
+                <td>
+                  VD - <b><u>Very Dissatisfied</u></b>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  NS/D- <b><u>Neither Satisfied nor Dissatisfied</u></b>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-end">
+          <em>Please check appropriate box</em>
+        </p>
+
+        <div class="grid-container mb-3">
+          <div><b>How would you rate our service in terms of:</b></div>
+          <div class="fw-bold text-center">
+            VS
+            <div class="border fw-bold border-dark text-center">5</div>
+          </div>
+          <div class="fw-bold text-center">
+            S
+            <div class="border fw-bold border-dark text-center">4</div>
+          </div>
+          <div class="fw-bold text-center">
+            NS/D
+            <div class="border fw-bold border-dark text-center">3</div>
+          </div>
+          <div class="fw-bold text-center">
+            D
+            <div class="border fw-bold border-dark text-center">2</div>
+          </div>
+          <div class="fw-bold text-center">
+            VD
+            <div class="border fw-bold border-dark text-center">1</div>
+          </div>
+
+          <div>
+            <b>1. Responsiveness</b>
+            <div>
+              The staff shows willingness to help, assist and provide prompt
+              service.
+            </div>
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[responsiveness]"
+              value="5"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[responsiveness]"
+              value="4"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[responsiveness]"
+              value="3"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[responsiveness]"
+              value="2"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[responsiveness]"
+              value="1"
+              required
+            />
+          </div>
+
+          <div>
+            <b>2. Reliability</b>
+            <div>
+              The staff provides service that conforms with the policy and
+              standards, with zero to minimal error rate.
+            </div>
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[reliability]"
+              value="5"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[reliability]"
+              value="4"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[reliability]"
+              value="3"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[reliability]"
+              value="2"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[reliability]"
+              value="1"
+              required
+            />
+          </div>
+
+          <div>
+            <b>3. Communication</b>
+            <div>
+              The staff communicates through a language that is easily
+              understood and willingness to lister to feedback.
+            </div>
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[communication]"
+              value="5"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[communication]"
+              value="4"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[communication]"
+              value="3"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[communication]"
+              value="2"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[communication]"
+              value="1"
+              required
+            />
+          </div>
+
+          <div>
+            <b>4. Courtesy</b>
+            <div>
+              The staff provides of service with respect &amp; courtesy.
+            </div>
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[courtesy]"
+              value="5"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[courtesy]"
+              value="4"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[courtesy]"
+              value="3"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[courtesy]"
+              value="2"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[courtesy]"
+              value="1"
+              required
+            />
+          </div>
+
+          <div>
+            <b>5. Integrity</b>
+            <div>The staff provides service with honesty &amp; integrity.</div>
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[integrity]"
+              value="5"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[integrity]"
+              value="4"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[integrity]"
+              value="3"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[integrity]"
+              value="2"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[integrity]"
+              value="1"
+              required
+            />
+          </div>
+
+          <div>
+            <b>6. Access and Facilities</b>
+            <div>
+              The location/waiting area is convinient and these are clear
+              signages.
+            </div>
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[accessAndFacilities]"
+              value="5"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[accessAndFacilities]"
+              value="4"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[accessAndFacilities]"
+              value="3"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[accessAndFacilities]"
+              value="2"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <input
+              class="form-check-input fs-4"
+              type="radio"
+              name="evaluate[accessAndFacilities]"
+              value="1"
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 mb-5">
+        <label for="remarks"
+          ><em>Suggestions/Recommendations/Comments/Complaints</em></label
+        >
+        <textarea
+          class="form-control"
+          name="evaluator[remarks]"
+          id="remarks"
+          cols="30"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <input
+          type="submit"
+          value="Submit Feedback"
+          class="form-control btn btn-success flex-fill"
+        />
+      </div>
+    </form>
+  </div>
+</div>

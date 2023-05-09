@@ -34,13 +34,13 @@
           </select>
         </div>
         <div class="col mt-4 d-flex">
-          <button type="submit" class="btn btn-success flex-grow-1"><i class="fa-regular fa-file-excel"></i> Generate .xlsx</button>
+          <button type="submit" class="btn btn-success flex-grow-1"><img src="/icons/xlsx.svg" width="30px"> Generate .xlsx</button>
         </div>
       </form>
 </div>
 <div class="row">
     <form action="/reports/download" target="_blank" class="download">
-        <button type="submit" class="btn btn-success"><img src="/images/sheets.png" alt=""> Download (.xlsx)</button>
+        <button type="submit" class="btn btn-success" id="submitBtn"><img src="/images/sheets.png" alt="" > Download (.xlsx)</button>
     </form>
 </div>
 
@@ -49,4 +49,11 @@
   setTimeout(() => {
     alert.remove()
   }, 5000);
+
+  const btn = document.getElementById('submitBtn')
+  btn.addEventListener('click', ()=>{
+    setTimeout(() => {
+      window.location.href = '/evaluation/new'
+    }, 1000);
+  })
 </script>

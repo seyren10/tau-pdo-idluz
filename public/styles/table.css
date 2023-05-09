@@ -1,0 +1,103 @@
+
+  .evaluations {
+    background: #ece6e6;
+    border-radius: 0.2em;
+    box-shadow: 0 4px 5px 2px #09090938;
+    overflow: hidden;
+  }
+  .eval-title {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    background-color: #008000;
+    color: white;
+    padding-inline: 2rem;
+  }
+  .eval-body {
+    padding: 1rem;
+  }
+
+  .eval-body .eval-item {
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.23em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". . . . . .";
+    align-content: center;
+  }
+  .eval-body .eval-item-8 {
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.23em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". . . . . . . .";
+    align-content: center;
+  }
+
+
+  .eval-headers {
+    border-bottom: 2px solid #008000;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". . . . . .";
+    align-content: center;
+  }
+  .eval-headers-8 {
+    border-bottom: 2px solid #008000;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". . . . . . . .";
+    align-content: center;
+  }
+  .eval-headers h5 {
+    font-size: 1rem;
+    color: #008000;
+  }
+  .eval-headers-8 h5 {
+    font-size: 1rem;
+    color: #008000;
+  }
+
+  .eval-actions {
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+    padding-inline: 1rem;
+  }
+
+  .striped {
+    background-color: white;
+  }
+
+  .analytics {
+    margin-left: auto;
+  }
+
+  @media screen and (width < 576px) {
+    .evaluations .eval-item div {
+      font-size: 0.65rem;
+    }
+    .evaluations .eval-item-8 div {
+      font-size: 0.65rem;
+    }
+    .evaluations .eval-body .eval-headers h5 {
+      font-size: 0.4rem;
+    }
+    .evaluations .eval-body .eval-headers-8 h5 {
+      font-size: 0.4rem;
+    }
+
+    .eval-actions {
+      flex-direction: column;
+    }
+    .eval-actions * {
+      width: 100%;
+    }
+  }

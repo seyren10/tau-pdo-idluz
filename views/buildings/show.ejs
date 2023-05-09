@@ -4,12 +4,12 @@
   <div class="col p-3 rounded shadow-lg">
     <h5>Administrator Commands</h5>
     <a href="/buildings/<%= building._id %>/edit" class="btn btn-success"
-      ><i class="fa-solid fa-pen-to-square"></i> Edit Details</a
+      ><img src="/icons/edit.svg" width="30px" />  Edit Details</a
     >
     <a
       href="/buildings/<%= building._id %>/sensitivity/new"
       class="btn btn-success"
-      ><i class="fa-solid fa-plus-minus"></i> Add/Edit Sensitivity Data</a
+      ><img src="/icons/add.svg" width="30px" />  Add/Edit Sensitivity Data</a
     >
     <button
       type="button"
@@ -17,7 +17,7 @@
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
     >
-      <i class="fa-solid fa-trash"></i> Delete building
+    <img src="/icons/delete.svg" width="30px" /> Delete building
     </button>
 
     <!-- Modal -->
@@ -220,12 +220,13 @@
 
   <% } %>
 
-  <div class="request-link">
-    <form action="/request">
-      <input type="hidden" name="buildingName" value="<%= building.name %>" />
-      <button class="btn btn-success">Request <br>Floor-plan</button>
-    </form>
-  </div>
+  <a
+    href="<%= `/request?buildingName=${building.name}` %>"
+    class="request-link bg-success rounded"
+  >
+    <img src="/images/floor-plan.png" alt="floor-plan" />
+    Request Floor-plan</a
+  >
 
   <script>
     const building = <%- JSON.stringify(building) %>

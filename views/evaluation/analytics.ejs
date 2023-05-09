@@ -1,0 +1,33 @@
+<%- layout('layouts/boilerplate') %>
+<style>
+  .chart {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #e7f5ed;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+  }
+  .chart div {
+    width: 30rem;
+
+    flex-grow: 1;
+  }
+</style>
+<div class="chart">
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+  <div>
+    <canvas id="myChart2"></canvas>
+  </div>
+</div>
+
+<script>
+  const evaluation = <%- JSON.stringify(evaluation)%>
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="/scripts/analytics.js"></script>

@@ -1,0 +1,71 @@
+<%- layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/styles/table.css" />
+
+<% if(!filteredEvals) {%>
+<div class="d-flex justify-content-center">
+  <div class="bg-secondary p-3 rounded text-white text-center">
+    <h5 class="fw-light">NO EVALUATION FOUND</h5>
+  </div>
+</div>
+<% } else{ %>
+<div class="evaluations">
+  <div class="eval-title">List of Evaluations</div>
+  <form action="/evaluation" class="eval-actions">
+    <div>
+      <label for="dateFilterFrom">Filter date from:</label>
+      <input
+        type="month"
+        name="dateFilterFrom"
+        id="dateFilterFrom"
+        class="form-control"
+        min="2023-01"
+      />
+    </div>
+    <div>
+      <label for="dateFilterTo">To:</label>
+      <input
+        type="month"
+        name="dateFilterTo"
+        id="dateFilterTo"
+        class="form-control"
+        min="2023-01"
+      />
+    </div>
+    <div>
+      <button class="btn btn-success">
+        <img src="/icons/filter.svg" width="20px"> Filter
+      </button>
+    </div>
+    <div class="analytics">
+      <a href="/evaluation/analytics" class="btn btn-success"
+        > <img src="/icons/analytics.svg" width="20px"> View Analytics</a
+      >
+    </div>
+  </form>
+  <div class="eval-body">
+    <div class="eval-headers">
+      <h5>Date of visit</h5>
+      <h5>Person/Office Visited</h5>
+      <h5>Service Requested</h5>
+      <h5>Client Name</h5>
+      <h5>Remarks</h5>
+      <h5>Actions</h5>
+    </div>
+    <% for(let i = 0; i < filteredEvals.length;i++ ) {%> <% const eval =
+    filteredEvals[i] %>
+    <div class="eval-item <%= i % 2 === 0 ? 'striped' :'' %>">
+      <div><%= eval.evaluator.visitDate %></div>
+      <div><%= eval.evaluator.visited %></div>
+      <div><%= eval.evaluator.service %></div>
+      <div><%= eval.evaluator.clientName %></div>
+      <div><%= eval.evaluator.remarks %></div>
+      <div>
+        <a class="link" href="/evaluation/<%= eval._id %>"
+          ><img src="/icons/info.svg" width="25px" > Full Details
+        </a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } %>

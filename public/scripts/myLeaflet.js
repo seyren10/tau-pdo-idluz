@@ -25,7 +25,7 @@ const maplayout = L.geoJSON(TAU_Layout, {
   style: {
     weight: 3,
     fillColor: "#394B2D",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "#0B3A07",
   },
 });
@@ -98,7 +98,7 @@ const clusterA = L.markerClusterGroup({
     return L.divIcon({
       className: "",
       // html: `<div class='marker-cluster a'><span>${clusterLabelA}</span></div>`,
-      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelA}</p></div>`
+      html: `<div class='marker-cluster'><img src=/icons/gps/gps-cluster.svg /> <p>${clusterLabelA}</p></div>`
     });
   },
   disableClusteringAtZoom: 18,
@@ -145,7 +145,7 @@ for (let building of classA) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker'><img src=/images/building-start.png /> <p>${building.location.mapLabel}</p></div>`,
+    html: `<div class='circle-marker'><img src=/icons/gps/gps-admin.svg /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelA = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -155,7 +155,7 @@ const layout_a = L.geoJSON(Layout_A, {
   style: {
     weight: .5,
     fillColor: "red",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "black",
   },
 });
@@ -172,7 +172,7 @@ const clusterB = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelB}</p></div>`
+      html: `<div class='marker-cluster'><img src='/icons/gps/gps-cluster.svg' /> <p>${clusterLabelB}</p></div>`
     });
   },
   disableClusteringAtZoom: 18,
@@ -214,7 +214,7 @@ for (let building of classB) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker'><img src=/images/building-gear.png /> <p>${building.location.mapLabel}</p></div>`,
+    html: `<div class='circle-marker'><img src=/icons/gps/gps-setting.svg /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelB = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -226,7 +226,7 @@ const layout_b = L.geoJSON(Layout_B, {
   style: {
     weight: .5,
     fillColor: "#F8820B",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "black",
   },
 });
@@ -243,7 +243,7 @@ const clusterC = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelC}</p></div>`
+      html: `<div class='marker-cluster'><img src='/icons/gps/gps-cluster.svg' /> <p>${clusterLabelC}</p></div>`
     });
   },
   disableClusteringAtZoom: 18,
@@ -285,7 +285,7 @@ for (let building of classC) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker'><img src=/images/building-acad.png /> <p>${building.location.mapLabel}</p></div>`,
+    html: `<div class='circle-marker'><img src=/icons/gps/gps-educ.svg /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelC = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -298,7 +298,7 @@ const layout_c = L.geoJSON(Layout_C, {
   style: {
     weight: .5,
     fillColor: "#1111DD",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "black",
   },
 });
@@ -315,7 +315,7 @@ const clusterD = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelD}</p></div>`
+      html: `<div class='marker-cluster'><img src='/icons/gps/gps-cluster.svg' /> <p>${clusterLabelD}</p></div>`
 
     });
   },
@@ -358,7 +358,7 @@ for (let building of classD) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker'><img src=/images/building-globe.png /> <p>${building.location.mapLabel}</p></div>`,
+    html: `<div class='circle-marker'><img src=/icons/gps/gps-research.svg /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelD = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -369,7 +369,7 @@ const layout_d = L.geoJSON(Layout_D, {
   style: {
     weight: .5,
     fillColor: "#E0E038",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "black",
   },
 });
@@ -388,7 +388,7 @@ const clusterE = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelE}</p></div>`
+      html: `<div class='marker-cluster'><img src='/icons/gps/gps-cluster.svg' /> <p>${clusterLabelE}</p></div>`
 
     });
   },
@@ -431,7 +431,7 @@ for (let building of classE) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker'><img src=/images/building-home.png /> <p>${building.location.mapLabel}</p></div>`,
+    html: `<div class='circle-marker'><img src=/icons/gps/gps-housing.svg /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelE = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -443,7 +443,7 @@ const layout_e = L.geoJSON(Layout_E, {
   style: {
     weight: .5,
     fillColor: "#D71275",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "black",
   },
 });
@@ -460,7 +460,7 @@ const clusterF = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelF}</p></div>`
+      html: `<div class='marker-cluster'><img src='/icons/gps/gps-cluster.svg' /> <p>${clusterLabelF}</p></div>`
 
     });
   },
@@ -503,7 +503,7 @@ for (let building of classF) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker'><img src=/images/building-sport.png /> <p>${building.location.mapLabel}</p></div>`,
+    html: `<div class='circle-marker'><img src=/icons/gps/gps-sport.svg /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelF = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -515,7 +515,7 @@ const layout_f = L.geoJSON(Layout_F, {
   style: {
     weight: .5,
     fillColor: "#1EEFEF",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "black",
   },
 });
@@ -531,7 +531,7 @@ const clusterG = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelG}</p></div>`
+      html: `<div class='marker-cluster'><img src='/icons/gps/gps-cluster.svg' /> <p>${clusterLabelG}</p></div>`
 
     });
   },
@@ -585,7 +585,7 @@ const layout_g = L.geoJSON(Layout_G, {
   style: {
     weight: .5,
     fillColor: "#D20D0D",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "black",
   },
 });
@@ -600,7 +600,7 @@ const clusterH = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
     return L.divIcon({
       className: "",
-      html: `<div class='marker-cluster'><img src='/images/icons8-city-buildings-96 (1).png' /> <p>${clusterLabelH}</p></div>`
+      html: `<div class='marker-cluster'><img src='/icons/gps/gps-cluster.svg' /> <p>${clusterLabelH}</p></div>`
     });
   },
   disableClusteringAtZoom: 18,
@@ -642,7 +642,7 @@ for (let building of classH) {
 
   const markerIcon = L.divIcon({
     className: "",
-    html: `<div class='circle-marker'><img src=/images/building-nav.png /> <p>${building.location.mapLabel}</p></div>`,
+    html: `<div class='circle-marker'><img src=/icons/gps/gps-other.svg /> <p>${building.location.mapLabel}</p></div>`,
   });
   clusterLabelH = building.location.mapLabel.slice(0,1)
   marker.setIcon(markerIcon);
@@ -653,7 +653,7 @@ const layout_h = L.geoJSON(Layout_H, {
   style: {
     weight: .5,
     fillColor: "#16E816",
-    fillOpacity: 0.5,
+    fillOpacity: 0.3,
     color: "black",
   },
 });

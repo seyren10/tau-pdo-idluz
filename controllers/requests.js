@@ -38,7 +38,7 @@ module.exports.create = async (req, res) => {
     "success",
     "Request sent. Please check your email inbox or spam within 24 hours."
   );
-  res.redirect("/request");
+  res.redirect("/evaluation/new");
 };
 
 module.exports.manage = async (req, res) => {
@@ -87,7 +87,7 @@ module.exports.send = async (req, res) => {
       html: successEmail,
       attachments: [
         {
-          filename: "bleh.png",
+          filename: "sample-floor-plan.png",
           path: path.join(
             __dirname,
             "../",
@@ -112,7 +112,6 @@ module.exports.send = async (req, res) => {
       req.flash("error", "Something went wrong. Please try again.");
       return res.redirect("/request/manage");
     } else {
-
       await Request.deleteOne({ _id: id });
       req.flash("success", "Email Successfuly sent. (" + info.messageId + ")");
       return res.redirect("/request/manage");

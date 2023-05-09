@@ -96,16 +96,44 @@ h5,
 
 .request-link {
   position: fixed;
-  left: 0;
-  bottom: 2rem;
+  right: 0;
+  top: 3rem;
+  margin: 1rem;
   z-index: 999;
+  width: 6rem;
+  padding: .5rem;
+  text-align: center;
+  border: 2px solid white;
+  box-sizing: content-box;
 }
+.request-link{
+  color: white;
+  text-decoration: none;
+}
+.request-link img {
+  width: 50%;
+  aspect-ratio: 1;
+}
+
+.request-link:hover {
+  text-decoration: underline;
+  box-shadow: inset 0px 0px 36px -14px rgba(0,0,0,0.75);
+
+}
+
+
 @media screen and (width < 768px) {
   .fit {
     max-height: 300px;
   }
   .pos-fixed-sm {
     position: fixed;
+  }
+}
+
+@media screen and (width < 576px){
+  .request-link img {
+    display: none;
   }
 }
 
